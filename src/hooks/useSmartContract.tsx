@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback } from "react";
 import { BrowserProvider, Contract, ethers, JsonRpcSigner } from "ethers";
 import lsp7Json from "../json/lsp7/lsp7.json";
@@ -5,7 +6,7 @@ import { useUpProvider } from "../context/UpProvider";
 import { lukso } from "viem/chains";
 
 export const useSmartContract = () => {
-  const { client, walletConnected, accounts, chainId } = useUpProvider();
+  const { client, accounts, chainId } = useUpProvider();
 
   {
     /**
@@ -44,6 +45,16 @@ export const useSmartContract = () => {
       */
   }
 
+  const getContractInstance = useCallback(
+    async (
+      contractAddress: string,
+      signer: ethers.Signer
+    ): Promise<Contract> => {
+      return new ethers.Contract(contractAddress, lsp7Json.abi, signer);
+    },
+    []
+  );
+
   const executeFunctionWithUProvider = useCallback(async () => {
     try {
       if (!client) {
@@ -70,7 +81,7 @@ export const useSmartContract = () => {
       console.error("Transaction failed:", error);
       return;
     }
-  }, [client, walletConnected, accounts]);
+  }, [client, chainId, getContractInstance, accounts]);
 
   const getProvider = async (): Promise<BrowserProvider> => {
     if (!window.lukso) {
@@ -96,16 +107,6 @@ export const useSmartContract = () => {
     const browserProvider = await getProvider();
     return browserProvider.getSigner();
   }, []);
-
-  const getContractInstance = useCallback(
-    async (
-      contractAddress: string,
-      signer: ethers.Signer
-    ): Promise<Contract> => {
-      return new ethers.Contract(contractAddress, lsp7Json.abi, signer);
-    },
-    []
-  );
 
   const executeFunction = useCallback(
     async (contractAddress: string, functionName: string, params: any[]) => {

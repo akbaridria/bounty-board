@@ -154,8 +154,8 @@ export function UpProvider({ children }: UpProviderProps) {
         setIsSearching,
       }}
     >
-      <div className=" min-h-screen flex items-center justify-center">
-        <div className="w-full">{children}</div>
+      <div className="min-h-screen">
+        <div className="m-auto w-full max-w-md">{children}</div>
       </div>
     </UpContext.Provider>
   );
