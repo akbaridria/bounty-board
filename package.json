@@ -13,9 +13,12 @@
   "dependencies": {
     "@lukso/up-provider": "^0.2.1",
     "@lukso/web-components": "^1.104.0",
+    "@radix-ui/react-scroll-area": "^1.2.6",
+    "@radix-ui/react-separator": "^1.1.4",
     "boring-avatars": "^1.11.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "ethereum-blockies-base64": "^1.0.2",
     "ethers": "^6.13.5",
     "graphql": "^16.11.0",

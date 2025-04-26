@@ -1,10 +1,11 @@
-import Header from '@/components/header'
+import Header from "@/components/header";
+import ListBounties from "@/components/list-bounties";
 
 function App() {
   return (
     <div>
       <Header />
-      this is main file
+      <ListBounties />
     </div>
   );
 }

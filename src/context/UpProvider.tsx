@@ -155,7 +155,7 @@ export function UpProvider({ children }: UpProviderProps) {
       }}
     >
       <div className="min-h-screen">
-        <div className="m-auto w-full max-w-md">{children}</div>
+        <div className="m-auto w-full max-w-4xl">{children}</div>
       </div>
     </UpContext.Provider>
   );
