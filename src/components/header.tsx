@@ -41,7 +41,7 @@ const Header = () => {
         />
       </div>
       <div className="p-4 mt-6">
-        <div className="mb-1 text-center font-bold">{profile?.fullName}</div>
+        <div className="mb-1 text-center font-bold">{profile?.fullName || '-'}</div>
         <div className="text-sm text-center text-muted-foreground max-w-md m-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
           convallis, arcu in tincidunt hendrerit.
