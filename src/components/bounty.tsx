@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { formatDistance, addHours } from "date-fns";
 import { Badge } from "./ui/badge";
 import { cn } from "@/lib/utils";
-import { TrophyIcon } from "lucide-react";
+import { InboxIcon, LockIcon, LockOpenIcon, TrophyIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 
@@ -50,13 +50,23 @@ const Bounty: React.FC<BountyProps> = ({ index }) => {
           <Badge
             variant="outline"
             className={cn(
-              "text-xs",
+              "text-xs flex items-center gap-1",
               isActive
-                ? "bg-green-100 text-green-800"
-                : "bg-red-100 text-red-800"
+                ? "bg-green-100 border-green-600 text-green-800"
+                : "bg-red-100 border-red-600 text-red-800"
             )}
           >
-            {isActive ? "Open" : "Closed"}
+            {isActive ? (
+              <>
+                <LockOpenIcon className="w-3 h-3" />
+                <div>Open</div>
+              </>
+            ) : (
+              <>
+                <LockIcon className="w-3 h-3" />
+                <div>Closed</div>
+              </>
+            )}
           </Badge>
           <span className="text-sm text-muted-foreground whitespace-nowrap">
             {timeLeft}
@@ -67,7 +77,8 @@ const Bounty: React.FC<BountyProps> = ({ index }) => {
         this is the content of the bounty.
       </div>
       <div className="flex items-center justify-between border-t px-4 py-2">
-        <div className="border px-4 py-1 rounded-lg bg-muted text-xs font-medium">
+        <div className="border px-2 py-1 rounded-lg bg-muted text-xs font-medium flex items-center gap-1">
+          <InboxIcon className="w-4 h-4" />
           14 Submissions
         </div>
         <div className="flex items-center gap-1">
@@ -77,7 +88,7 @@ const Bounty: React.FC<BountyProps> = ({ index }) => {
             strokeWidth={2}
           />
           <span className="text-sm font-semibold text-muted-foreground">
-            0.5 ETH
+            1.000 LYX
           </span>
         </div>
       </div>
