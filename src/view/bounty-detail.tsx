@@ -1,5 +1,7 @@
 import BackButton from "@/components/back-button";
 import PageWrapper from "@/components/page-wrapper";
+import Submission from "@/components/submission";
+import TipTapEditor from "@/components/tiptap";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import Avatar from "boring-avatars";
@@ -67,6 +69,20 @@ const BountyDetail = () => {
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
+          </div>
+          <div className="space-y-6">
+            <div className="text-lg font-semibold">Submissions</div>
+            <div className="space-y-2">
+              <TipTapEditor
+                maxHeight={200}
+                customContent="<p>Write your submissions..</p>"
+              />
+            </div>
+            <div className="space-y-3">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <Submission key={index} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

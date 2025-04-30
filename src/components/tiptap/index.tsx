@@ -2,6 +2,7 @@
 import { EditorProvider } from "@tiptap/react";
 import MenuBar from "./menu-bar";
 import { extensions } from "./extentions";
+import { cn } from "@/lib/utils";
 
 const content = `
 <h2>
@@ -26,18 +27,28 @@ const content = `
 </blockquote>
 `;
 
-export default () => {
+const TipTapEditor: React.FC<{
+  maxHeight?: number;
+  customContent?: string;
+  editable?: boolean;
+}> = ({ maxHeight, customContent, editable = true }) => {
   return (
     <EditorProvider
-      slotBefore={<MenuBar />}
+      slotBefore={editable ? <MenuBar /> : undefined}
       extensions={extensions}
-      content={content}
+      content={customContent || content}
+      editable={editable}
       editorProps={{
         attributes: {
-          class:
-            "prose prose-sm border max-h-[480px] p-4 rounded-lg overflow-y-auto sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none",
+          class: cn(
+            "prose prose-sm rounded-lg overflow-y-auto sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none",
+            editable ? "border p-4" : ""
+          ),
+          style: `max-height: ${maxHeight ? `${maxHeight}px` : "480px"}`,
         },
       }}
     ></EditorProvider>
   );
 };
+
+export default TipTapEditor;
