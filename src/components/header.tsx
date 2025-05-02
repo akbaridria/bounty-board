@@ -6,20 +6,20 @@ import { useEffect, useState } from "react";
 import { FlickeringGrid } from "./magicui/flickering-grid";
 
 const Header = () => {
-  const { accounts } = useUpProvider();
+  const { contextAccounts } = useUpProvider();
   const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    // if (accounts.length > 0) {
+    if (contextAccounts.length > 0) {
     queryUP<ProfileQueryResponse>(QUERY_PROFILE_BY_ADDRESS, {
       id:
-        accounts[0] ||
-        "0x81524BEa776f425F571037927FC387120c04722A".toLowerCase(),
+        contextAccounts[0]?.toLowerCase()
     }).then((res) => {
+      console.log(res);
       setProfile(res?.profile);
     });
-    // }
-  }, [accounts]);
+    }
+  }, [contextAccounts]);
 
   return (
     <div className="mb-4 sticky -top-28 z-10 bg-white">
@@ -43,8 +43,7 @@ const Header = () => {
       <div className="p-4 mt-6">
         <div className="mb-1 text-center font-bold">{profile?.fullName || '-'}</div>
         <div className="text-sm text-center text-muted-foreground max-w-md m-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-          convallis, arcu in tincidunt hendrerit.
+          {profile?.description || 'No description available.'}
         </div>
       </div>
     </div>

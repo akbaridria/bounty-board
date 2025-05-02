@@ -1,0 +1,1961 @@
+{
+    "abi": [
+        {
+            "type": "constructor",
+            "inputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "fallback",
+            "stateMutability": "payable"
+        },
+        {
+            "type": "receive",
+            "stateMutability": "payable"
+        },
+        {
+            "type": "function",
+            "name": "PLATFORM_FEE_PERCENTAGE",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "bounties",
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "id",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "isActive",
+                    "type": "bool",
+                    "internalType": "bool"
+                },
+                {
+                    "name": "creator",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "cid",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "deadline",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "resultDeadline",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "minParticipants",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "totalWinners",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "bountyType",
+                    "type": "uint8",
+                    "internalType": "enum BountyType"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "bountyIdCounter",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "bountySubmissions",
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "cid",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "participant",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "calculatePrizesAndFee",
+            "inputs": [
+                {
+                    "name": "_prizes",
+                    "type": "uint256[]",
+                    "internalType": "uint256[]"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "totalPrizeAmount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "platformFee",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "pure"
+        },
+        {
+            "type": "function",
+            "name": "cancelBounty",
+            "inputs": [
+                {
+                    "name": "_bountyId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "createBounty",
+            "inputs": [
+                {
+                    "name": "_cid",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "_deadline",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_resultDeadline",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_minParticipants",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_totalWinners",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_prizes",
+                    "type": "uint256[]",
+                    "internalType": "uint256[]"
+                },
+                {
+                    "name": "_bountyType",
+                    "type": "uint8",
+                    "internalType": "enum BountyType"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "payable"
+        },
+        {
+            "type": "function",
+            "name": "createSubmission",
+            "inputs": [
+                {
+                    "name": "_bountyId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_cid",
+                    "type": "string",
+                    "internalType": "string"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "editBounty",
+            "inputs": [
+                {
+                    "name": "_bountyId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_cid",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "_deadline",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_resultDeadline",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_minParticipants",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_totalWinners",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_prizes",
+                    "type": "uint256[]",
+                    "internalType": "uint256[]"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "payable"
+        },
+        {
+            "type": "function",
+            "name": "editSubmision",
+            "inputs": [
+                {
+                    "name": "_bountyId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_cid",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "_submissionIndex",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "feeCollected",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBounty",
+            "inputs": [
+                {
+                    "name": "_bountyId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple",
+                    "internalType": "struct Bounty",
+                    "components": [
+                        {
+                            "name": "id",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "isActive",
+                            "type": "bool",
+                            "internalType": "bool"
+                        },
+                        {
+                            "name": "creator",
+                            "type": "address",
+                            "internalType": "address"
+                        },
+                        {
+                            "name": "cid",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "deadline",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "resultDeadline",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        },
+                        {
+                            "name": "minParticipants",
+                            "type": "uint16",
+                            "internalType": "uint16"
+                        },
+                        {
+                            "name": "totalWinners",
+                            "type": "uint16",
+                            "internalType": "uint16"
+                        },
+                        {
+                            "name": "prizes",
+                            "type": "uint256[]",
+                            "internalType": "uint256[]"
+                        },
+                        {
+                            "name": "selectedWinners",
+                            "type": "address[]",
+                            "internalType": "address[]"
+                        },
+                        {
+                            "name": "bountyType",
+                            "type": "uint8",
+                            "internalType": "enum BountyType"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getBountySubmissions",
+            "inputs": [
+                {
+                    "name": "_bountyId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "tuple[]",
+                    "internalType": "struct Submission[]",
+                    "components": [
+                        {
+                            "name": "cid",
+                            "type": "string",
+                            "internalType": "string"
+                        },
+                        {
+                            "name": "participant",
+                            "type": "address",
+                            "internalType": "address"
+                        },
+                        {
+                            "name": "timestamp",
+                            "type": "uint256",
+                            "internalType": "uint256"
+                        }
+                    ]
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getUserBounties",
+            "inputs": [
+                {
+                    "name": "_creator",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256[]",
+                    "internalType": "uint256[]"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "isParticipant",
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool",
+                    "internalType": "bool"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "isParticipantOfBounty",
+            "inputs": [
+                {
+                    "name": "_bountyId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_participant",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool",
+                    "internalType": "bool"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "owner",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "renounceOwnership",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "selectWinners",
+            "inputs": [
+                {
+                    "name": "_bountyId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "_winners",
+                    "type": "address[]",
+                    "internalType": "address[]"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "transferOwnership",
+            "inputs": [
+                {
+                    "name": "newOwner",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "userBounties",
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "withdraw",
+            "inputs": [
+                {
+                    "name": "_amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "event",
+            "name": "BountyCancelled",
+            "inputs": [
+                {
+                    "name": "id",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BountyCreated",
+            "inputs": [
+                {
+                    "name": "id",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "creator",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "cid",
+                    "type": "string",
+                    "indexed": false,
+                    "internalType": "string"
+                },
+                {
+                    "name": "deadline",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "resultDeadline",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "minParticipants",
+                    "type": "uint16",
+                    "indexed": false,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "totalWinners",
+                    "type": "uint16",
+                    "indexed": false,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "prizes",
+                    "type": "uint256[]",
+                    "indexed": false,
+                    "internalType": "uint256[]"
+                },
+                {
+                    "name": "bountyType",
+                    "type": "uint8",
+                    "indexed": false,
+                    "internalType": "enum BountyType"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "BountyUpdated",
+            "inputs": [
+                {
+                    "name": "id",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "creator",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "cid",
+                    "type": "string",
+                    "indexed": false,
+                    "internalType": "string"
+                },
+                {
+                    "name": "deadline",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "resultDeadline",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "minParticipants",
+                    "type": "uint16",
+                    "indexed": false,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "totalWinners",
+                    "type": "uint16",
+                    "indexed": false,
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "prizes",
+                    "type": "uint256[]",
+                    "indexed": false,
+                    "internalType": "uint256[]"
+                },
+                {
+                    "name": "bountyType",
+                    "type": "uint8",
+                    "indexed": false,
+                    "internalType": "enum BountyType"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "OwnershipTransferred",
+            "inputs": [
+                {
+                    "name": "previousOwner",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "newOwner",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "SubmissionCreated",
+            "inputs": [
+                {
+                    "name": "bountyId",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "cid",
+                    "type": "string",
+                    "indexed": false,
+                    "internalType": "string"
+                },
+                {
+                    "name": "participant",
+                    "type": "address",
+                    "indexed": false,
+                    "internalType": "address"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "SubmissionUdpated",
+            "inputs": [
+                {
+                    "name": "bountyId",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "cid",
+                    "type": "string",
+                    "indexed": false,
+                    "internalType": "string"
+                },
+                {
+                    "name": "participant",
+                    "type": "address",
+                    "indexed": false,
+                    "internalType": "address"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "WinnersSelected",
+            "inputs": [
+                {
+                    "name": "bountyId",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "winners",
+                    "type": "address[]",
+                    "indexed": false,
+                    "internalType": "address[]"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "error",
+            "name": "BountyBoard__InsufficientFunds",
+            "inputs": [
+                {
+                    "name": "amountUser",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "amountRequired",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "OwnableInvalidOwner",
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "OwnableUnauthorizedAccount",
+            "inputs": [
+                {
+                    "name": "account",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ReentrancyGuardReentrantCall",
+            "inputs": []
+        }
+    ],
+    "bytecode": {
+        "object": "0x6080604052348015600e575f5ffd5b503380603357604051631e4fbdf760e01b81525f600482015260240160405180910390fd5b603a816043565b50600180556092565b5f80546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b612bae8061009f5f395ff3fe60806040526004361061012b575f3560e01c8063715018a6116100a4578063a5e99c4e1161006b578063a5e99c4e1461035d578063ccf7c20a1461037c578063dc2f87441461039b578063e5e5dff1146103cf578063ee8c4bbf146103ee578063f2fde38b1461041a57005b8063715018a61461028a578063758d9b891461029e5780637dda8f80146102d75780638da5cb5b1461030b57806392af09621461033157005b8063429e2398116100f3578063429e2398146101c4578063439460c5146101f25780635af38890146102055780636591a18514610234578063666980b5146102605780636ca7f95c1461027557005b8063155482321461012d5780632b9234b9146101545780632e1a7d4d146101735780632f8feaf214610192578063342ec937146101b1575b005b348015610138575f5ffd5b50610141600581565b6040519081526020015b60405180910390f35b34801561015f575f5ffd5b5061014161016e366004611fe5565b610439565b34801561017e575f5ffd5b5061012b61018d36600461200d565b610464565b34801561019d575f5ffd5b5061012b6101ac3660046120d3565b610516565b61012b6101bf3660046121af565b6106ac565b3480156101cf575f5ffd5b506101e36101de36600461224d565b61083d565b60405161014b9392919061229b565b6101416102003660046122c8565b61090d565b348015610210575f5ffd5b5061022461021f366004612374565b610d49565b604051901515815260200161014b565b34801561023f575f5ffd5b5061025361024e36600461239e565b610d75565b60405161014b91906123f8565b34801561026b575f5ffd5b5061014160025481565b348015610280575f5ffd5b5061014160075481565b348015610295575f5ffd5b5061012b610dde565b3480156102a9575f5ffd5b506102246102b8366004612374565b600660209081525f928352604080842090915290825290205460ff1681565b3480156102e2575f5ffd5b506102f66102f136600461240a565b610df1565b6040805192835260208301919091520161014b565b348015610316575f5ffd5b505f546040516001600160a01b03909116815260200161014b565b34801561033c575f5ffd5b5061035061034b36600461200d565b610e3e565b60405161014b9190612443565b348015610368575f5ffd5b5061012b6103773660046124cf565b610f5d565b348015610387575f5ffd5b5061012b610396366004612512565b6111cc565b3480156103a6575f5ffd5b506103ba6103b536600461200d565b611428565b60405161014b999897969594939291906125be565b3480156103da575f5ffd5b5061012b6103e936600461200d565b611511565b3480156103f9575f5ffd5b5061040d61040836600461200d565b611733565b60405161014b9190612667565b348015610425575f5ffd5b5061012b61043436600461239e565b611992565b6004602052815f5260405f208181548110610452575f80fd5b905f5260205f20015f91509150505481565b61046c6119cf565b6007548111156104975760405162461bcd60e51b815260040161048e90612750565b60405180910390fd5b6040515f90339083908381818185875af1925050503d805f81146104d6576040519150601f19603f3d011682016040523d82523d5f602084013e6104db565b606091505b50509050806104fc5760405162461bcd60e51b815260040161048e90612787565b8160075f82825461050d91906127d2565b90915550505050565b5f838152600360205260409020600181015460ff166105475760405162461bcd60e51b815260040161048e906127e5565b336105945760405162461bcd60e51b815260206004820181905260248201527f426f756e7479426f6172643a20494e56414c49445f5041525449434950414e54604482015260640161048e565b600181015461010090046001600160a01b031633036105c55760405162461bcd60e51b815260040161048e9061281c565b5f8481526005602052604081208054849081106105e4576105e461285e565b5f91825260209091206001600390920201908101549091506001600160a01b0316331461065d5760405162461bcd60e51b815260206004820152602160248201527f426f756e7479426f6172643a204e4f545f5355424d495353494f4e5f4f574e456044820152602960f91b606482015260840161048e565b8061066885826128f3565b50847fe02fe9d7521de5f0f16e1f80c259fc29b05821d29519d689b87239a0452fa32e85334260405161069d9392919061229b565b60405180910390a25050505050565b6106b46119fb565b5f878152600360205260409020600181015460ff166106e55760405162461bcd60e51b815260040161048e906127e5565b600181015461010090046001600160a01b031633146107165760405162461bcd60e51b815260040161048e906129ad565b5f600882015460ff1660018111156107305761073061258a565b1461077d5760405162461bcd60e51b815260206004820181905260248201527f426f756e7479426f6172643a204e4f4e5f4544495441424c455f424f554e5459604482015260640161048e565b6002810161078b88826128f3565b50600381018690556004810185905560058101805461ffff858116620100000263ffffffff199092169087161717905581516107d09060068301906020850190611ec9565b506107da82611a25565b805460088201546040513392917f8bb4600c44290d6f2ffc2b5dcda5c870d35ec8d7176bff35c6353d717eecbf5991610822918c918c918c918c918c918c9160ff16906129e4565b60405180910390a35061083460018055565b50505050505050565b6005602052815f5260405f208181548110610856575f80fd5b905f5260205f2090600302015f9150915050805f01805461087690612872565b80601f01602080910402602001604051908101604052809291908181526020018280546108a290612872565b80156108ed5780601f106108c4576101008083540402835291602001916108ed565b820191905f5260205f20905b8154815290600101906020018083116108d057829003601f168201915b50505050600183015460029093015491926001600160a01b031691905083565b5f6109166119fb565b4287116109655760405162461bcd60e51b815260206004820152601a60248201527f426f756e7479426f6172643a20504153545f444541444c494e45000000000000604482015260640161048e565b8686116109c05760405162461bcd60e51b8152602060048201526024808201527f426f756e7479426f6172643a20494e56414c49445f524553554c545f444541446044820152634c494e4560e01b606482015260840161048e565b5f8561ffff1611610a135760405162461bcd60e51b815260206004820152601e60248201527f426f756e7479426f6172643a205a45524f5f5041525449434950414e54530000604482015260640161048e565b5f8461ffff1611610a665760405162461bcd60e51b815260206004820152601960248201527f426f756e7479426f6172643a205a45524f5f57494e4e45525300000000000000604482015260640161048e565b8361ffff16835114610ac65760405162461bcd60e51b8152602060048201526024808201527f426f756e7479426f6172643a205052495a45535f57494e4e4552535f4d49534d604482015263082a886960e31b606482015260840161048e565b610acf83611a25565b5f6040518061016001604052806002548152602001600115158152602001336001600160a01b031681526020018a81526020018981526020018881526020018761ffff1681526020018661ffff1681526020018581526020015f6001600160401b03811115610b4057610b40612024565b604051908082528060200260200182016040528015610b69578160200160208202803683370190505b508152602001846001811115610b8157610b8161258a565b9052600280545f908152600360209081526040918290208451815590840151600182018054938601516001600160a01b031661010002610100600160a81b0319921515929092166001600160a81b03199094169390931717909155606083015192935083929091820190610bf590826128f3565b506080820151600382015560a0820151600482015560c082015160058201805460e085015161ffff908116620100000263ffffffff199092169316929092179190911790556101008201518051610c56916006840191602090910190611ec9565b506101208201518051610c73916007840191602090910190611f12565b5061014082015160088201805460ff191660018381811115610c9757610c9761258a565b021790555050335f81815260046020908152604080832060028054825460018101845592865293909420019190915590549051919250907f420df0fd401f26642c4d43817ce1ecd5e2c2b223d6174c721d401c440520b20f90610d07908d908d908d908d908d908d908d906129e4565b60405180910390a360028054905f610d1e83612a44565b91905055506001600254610d3291906127d2565b915050610d3e60018055565b979650505050505050565b5f8281526006602090815260408083206001600160a01b038516845290915290205460ff165b92915050565b6001600160a01b0381165f90815260046020908152604091829020805483518184028101840190945280845260609392830182828015610dd257602002820191905f5260205f20905b815481526020019060010190808311610dbe575b50505050509050919050565b610de66119cf565b610def5f611a8e565b565b5f80805b8351811015610e2d57838181518110610e1057610e1061285e565b602002602001015183610e239190612a5c565b9250600101610df5565b50610e3782611add565b9050915091565b606060055f8381526020019081526020015f20805480602002602001604051908101604052809291908181526020015f905b82821015610f52578382905f5260205f2090600302016040518060600160405290815f82018054610ea090612872565b80601f0160208091040260200160405190810160405280929190818152602001828054610ecc90612872565b8015610f175780601f10610eee57610100808354040283529160200191610f17565b820191905f5260205f20905b815481529060010190602001808311610efa57829003601f168201915b50505091835250506001828101546001600160a01b031660208084019190915260029093015460409092019190915291835292019101610e70565b505050509050919050565b5f828152600360205260409020600181015460ff16610f8e5760405162461bcd60e51b815260040161048e906127e5565b33610fdb5760405162461bcd60e51b815260206004820181905260248201527f426f756e7479426f6172643a20494e56414c49445f5041525449434950414e54604482015260640161048e565b600181015461010090046001600160a01b0316330361100c5760405162461bcd60e51b815260040161048e9061281c565b80600301544211156110705760405162461bcd60e51b815260206004820152602760248201527f426f756e7479426f6172643a205355424d495353494f4e5f444541444c494e4560448201526617d41054d4d15160ca1b606482015260840161048e565b5f83815260066020908152604080832033845290915290205460ff16156110e35760405162461bcd60e51b815260206004820152602160248201527f426f756e7479426f6172643a20414c52454144595f50415254494349504154456044820152601160fa1b606482015260840161048e565b604080516060810182528381523360208083019190915242828401525f8681526005825292832080546001810182559084529220815191928392600390910290910190819061113290826128f3565b50602082810151600183810180546001600160a01b0319166001600160a01b03909316929092179091556040938401516002909301929092555f87815260068252838120338083529252839020805460ff1916909217909155905185917fb0208e8a030021485962b4e500febffb555f44a33144a13a214d2a039a624cbd916111be918791429061229b565b60405180910390a250505050565b5f838152600360205260409020600181015460ff166111fd5760405162461bcd60e51b815260040161048e906127e5565b600181015461010090046001600160a01b0316331461122e5760405162461bcd60e51b815260040161048e906129ad565b600581015462010000900461ffff16821461128b5760405162461bcd60e51b815260206004820152601d60248201527f426f756e7479426f6172643a2057494e4e4552535f4d49534d41544348000000604482015260640161048e565b6007810154156112ad5760405162461bcd60e51b815260040161048e90612a6f565b600581015461ffff168210156112d55760405162461bcd60e51b815260040161048e90612ab4565b80600401544211156113355760405162461bcd60e51b815260206004820152602360248201527f426f756e7479426f6172643a20524553554c545f444541444c494e455f50415360448201526214d15160ea1b606482015260840161048e565b806003015442101561139e5760405162461bcd60e51b815260206004820152602c60248201527f426f756e7479426f6172643a205355424d495353494f4e5f444541444c494e4560448201526b17d393d517d4915050d2115160a21b606482015260840161048e565b6113c083838360010160019054906101000a90046001600160a01b0316611af5565b6113cb848484611cdf565b6113d9838383600601611d9a565b6113e7600782018484611f65565b5060018101805460ff1916905560405184907f5fa006001f7473b386c7bb4db093cb973ce5c895e51c3813bdbd723097d0349e906111be9086908690612af8565b60036020525f9081526040902080546001820154600283018054929360ff8316936101009093046001600160a01b03169290919061146590612872565b80601f016020809104026020016040519081016040528092919081815260200182805461149190612872565b80156114dc5780601f106114b3576101008083540402835291602001916114dc565b820191905f5260205f20905b8154815290600101906020018083116114bf57829003601f168201915b505050506003830154600484015460058501546008909501549394919390925061ffff80831692620100009004169060ff1689565b5f818152600360205260409020600181015460ff166115425760405162461bcd60e51b815260040161048e906127e5565b600181015461010090046001600160a01b031633146115735760405162461bcd60e51b815260040161048e906129ad565b6007810154156115955760405162461bcd60e51b815260040161048e90612a6f565b5f828152600560208190526040909120549082015461ffff16116115cb5760405162461bcd60e51b815260040161048e90612ab4565b4281600401541061162f5760405162461bcd60e51b815260206004820152602860248201527f426f756e7479426f6172643a20524553554c545f444541444c494e455f4e4f5460448201526717d4915050d2115160c21b606482015260840161048e565b60018101805460ff191690555f805b600683015481101561167d5782600601818154811061165f5761165f61285e565b905f5260205f200154826116739190612a5c565b915060010161163e565b508047101561169e5760405162461bcd60e51b815260040161048e90612750565b6040515f90339083908381818185875af1925050503d805f81146116dd576040519150601f19603f3d011682016040523d82523d5f602084013e6116e2565b606091505b50509050806117035760405162461bcd60e51b815260040161048e90612787565b82546040517f92717314c0b0f9d632e1d46a0b8437778ff9daee1db8ec295f2bc0b57c4bcaac905f90a250505050565b61178e60408051610160810182525f8082526020820181905291810182905260608082018190526080820183905260a0820183905260c0820183905260e0820183905261010082018190526101208201529061014082015290565b5f8281526003602090815260409182902082516101608101845281548152600182015460ff81161515938201939093526101009092046001600160a01b0316928201929092526002820180549192916060840191906117ec90612872565b80601f016020809104026020016040519081016040528092919081815260200182805461181890612872565b80156118635780601f1061183a57610100808354040283529160200191611863565b820191905f5260205f20905b81548152906001019060200180831161184657829003601f168201915b505050918352505060038201546020808301919091526004830154604080840191909152600584015461ffff80821660608601526201000090910416608084015260068401805482518185028101850190935280835260a09094019391929091908301828280156118f157602002820191905f5260205f20905b8154815260200190600101908083116118dd575b505050505081526020016007820180548060200260200160405190810160405280929190818152602001828054801561195157602002820191905f5260205f20905b81546001600160a01b03168152600190910190602001808311611933575b5050509183525050600882015460209091019060ff1660018111156119785761197861258a565b60018111156119895761198961258a565b90525092915050565b61199a6119cf565b6001600160a01b0381166119c357604051631e4fbdf760e01b81525f600482015260240161048e565b6119cc81611a8e565b50565b5f546001600160a01b03163314610def5760405163118cdaa760e01b815233600482015260240161048e565b600260015403611a1e57604051633ee5aeb560e01b815260040160405180910390fd5b6002600155565b5f5f611a3083610df1565b9092509050611a3f8183612a5c565b341015611a735734611a518284612a5c565b604051630fde74bd60e01b81526004810192909252602482015260440161048e565b8060075f828254611a849190612a5c565b9091555050505050565b5f80546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b5f6064611aeb600584612b42565b610d6f9190612b59565b5f5b82811015611cd9575f848483818110611b1257611b1261285e565b9050602002016020810190611b27919061239e565b6001600160a01b031603611b7d5760405162461bcd60e51b815260206004820152601b60248201527f426f756e7479426f6172643a20494e56414c49445f57494e4e45520000000000604482015260640161048e565b816001600160a01b0316848483818110611b9957611b9961285e565b9050602002016020810190611bae919061239e565b6001600160a01b031603611c045760405162461bcd60e51b815260206004820152601f60248201527f426f756e7479426f6172643a2043524541544f525f43414e4e4f545f57494e00604482015260640161048e565b5f611c10826001612a5c565b90505b83811015611cd057848482818110611c2d57611c2d61285e565b9050602002016020810190611c42919061239e565b6001600160a01b0316858584818110611c5d57611c5d61285e565b9050602002016020810190611c72919061239e565b6001600160a01b031603611cc85760405162461bcd60e51b815260206004820152601f60248201527f426f756e7479426f6172643a2057494e4e4552535f4e4f545f554e4951554500604482015260640161048e565b600101611c13565b50600101611af7565b50505050565b5f5b81811015611cd9575f84815260066020526040812090848484818110611d0957611d0961285e565b9050602002016020810190611d1e919061239e565b6001600160a01b0316815260208101919091526040015f205460ff16611d925760405162461bcd60e51b815260206004820152602360248201527f426f756e7479426f6172643a2057494e4e45525f4e4f545f504152544943495060448201526210539560ea1b606482015260840161048e565b600101611ce1565b5f805b83811015611dd557828181548110611db757611db761285e565b905f5260205f20015482611dcb9190612a5c565b9150600101611d9d565b5080471015611df65760405162461bcd60e51b815260040161048e90612750565b5f5b83811015611ec2575f858583818110611e1357611e1361285e565b9050602002016020810190611e28919061239e565b90505f848381548110611e3d57611e3d61285e565b905f5260205f20015490505f826001600160a01b0316826040515f6040518083038185875af1925050503d805f8114611e91576040519150601f19603f3d011682016040523d82523d5f602084013e611e96565b606091505b5050905080611eb75760405162461bcd60e51b815260040161048e90612787565b505050600101611df8565b5050505050565b828054828255905f5260205f20908101928215611f02579160200282015b82811115611f02578251825591602001919060010190611ee7565b50611f0e929150611fb6565b5090565b828054828255905f5260205f20908101928215611f02579160200282015b82811115611f0257825182546001600160a01b0319166001600160a01b03909116178255602090920191600190910190611f30565b828054828255905f5260205f20908101928215611f02579160200282015b82811115611f025781546001600160a01b0319166001600160a01b03843516178255602090920191600190910190611f83565b5b80821115611f0e575f8155600101611fb7565b80356001600160a01b0381168114611fe0575f5ffd5b919050565b5f5f60408385031215611ff6575f5ffd5b611fff83611fca565b946020939093013593505050565b5f6020828403121561201d575f5ffd5b5035919050565b634e487b7160e01b5f52604160045260245ffd5b604051601f8201601f191681016001600160401b038111828210171561206057612060612024565b604052919050565b5f82601f830112612077575f5ffd5b81356001600160401b0381111561209057612090612024565b6120a3601f8201601f1916602001612038565b8181528460208386010111156120b7575f5ffd5b816020850160208301375f918101602001919091529392505050565b5f5f5f606084860312156120e5575f5ffd5b8335925060208401356001600160401b03811115612101575f5ffd5b61210d86828701612068565b93969395505050506040919091013590565b803561ffff81168114611fe0575f5ffd5b5f82601f83011261213f575f5ffd5b81356001600160401b0381111561215857612158612024565b8060051b61216860208201612038565b91825260208185018101929081019086841115612183575f5ffd5b6020860192505b838310156121a557823582526020928301929091019061218a565b9695505050505050565b5f5f5f5f5f5f5f60e0888a0312156121c5575f5ffd5b8735965060208801356001600160401b038111156121e1575f5ffd5b6121ed8a828b01612068565b965050604088013594506060880135935061220a6080890161211f565b925061221860a0890161211f565b915060c08801356001600160401b03811115612232575f5ffd5b61223e8a828b01612130565b91505092959891949750929550565b5f5f6040838503121561225e575f5ffd5b50508035926020909101359150565b5f81518084528060208401602086015e5f602082860101526020601f19601f83011685010191505092915050565b606081525f6122ad606083018661226d565b6001600160a01b039490941660208301525060400152919050565b5f5f5f5f5f5f5f60e0888a0312156122de575f5ffd5b87356001600160401b038111156122f3575f5ffd5b6122ff8a828b01612068565b975050602088013595506040880135945061231c6060890161211f565b935061232a6080890161211f565b925060a08801356001600160401b03811115612344575f5ffd5b6123508a828b01612130565b92505060c088013560028110612364575f5ffd5b8091505092959891949750929550565b5f5f60408385031215612385575f5ffd5b8235915061239560208401611fca565b90509250929050565b5f602082840312156123ae575f5ffd5b6123b782611fca565b9392505050565b5f8151808452602084019350602083015f5b828110156123ee5781518652602095860195909101906001016123d0565b5093949350505050565b602081525f6123b760208301846123be565b5f6020828403121561241a575f5ffd5b81356001600160401b0381111561242f575f5ffd5b61243b84828501612130565b949350505050565b5f602082016020835280845180835260408501915060408160051b8601019250602086015f5b828110156124c357603f19878603018452815180516060875261248f606088018261226d565b6020838101516001600160a01b03168982015260409384015193909801929092525094938401939190910190600101612469565b50929695505050505050565b5f5f604083850312156124e0575f5ffd5b8235915060208301356001600160401b038111156124fc575f5ffd5b61250885828601612068565b9150509250929050565b5f5f5f60408486031215612524575f5ffd5b8335925060208401356001600160401b03811115612540575f5ffd5b8401601f81018613612550575f5ffd5b80356001600160401b03811115612565575f5ffd5b8660208260051b8401011115612579575f5ffd5b939660209190910195509293505050565b634e487b7160e01b5f52602160045260245ffd5b600281106125ba57634e487b7160e01b5f52602160045260245ffd5b9052565b89815288151560208201526001600160a01b0388166040820152610120606082018190525f906125f09083018961226d565b90508660808301528560a083015261ffff851660c083015261ffff841660e083015261262061010083018461259e565b9a9950505050505050505050565b5f8151808452602084019350602083015f5b828110156123ee5781516001600160a01b0316865260209586019590910190600101612640565b60208152815160208201525f6020830151612686604084018215159052565b5060408301516001600160a01b038116606084015250606083015161016060808401526126b761018084018261226d565b9050608084015160a084015260a084015160c084015260c08401516126e260e085018261ffff169052565b5060e084015161ffff811661010085015250610100840151838203601f190161012085015261271182826123be565b915050610120840151601f1984830301610140850152612731828261262e565b91505061014084015161274861016085018261259e565b509392505050565b6020808252601f908201527f426f756e7479426f6172643a20494e53554646494349454e545f46554e445300604082015260600190565b6020808252601c908201527f426f756e7479426f6172643a205452414e534645525f4641494c454400000000604082015260600190565b634e487b7160e01b5f52601160045260245ffd5b81810381811115610d6f57610d6f6127be565b6020808252601d908201527f426f756e7479426f6172643a20424f554e54595f4e4f545f464f554e44000000604082015260600190565b60208082526022908201527f426f756e7479426f6172643a2043524541544f525f43414e4e4f545f5355424d604082015261125560f21b606082015260800190565b634e487b7160e01b5f52603260045260245ffd5b600181811c9082168061288657607f821691505b6020821081036128a457634e487b7160e01b5f52602260045260245ffd5b50919050565b601f8211156128ee57805f5260205f20601f840160051c810160208510156128cf5750805b601f840160051c820191505b81811015611ec2575f81556001016128db565b505050565b81516001600160401b0381111561290c5761290c612024565b6129208161291a8454612872565b846128aa565b6020601f821160018114612952575f831561293b5750848201515b5f19600385901b1c1916600184901b178455611ec2565b5f84815260208120601f198516915b828110156129815787850151825560209485019460019092019101612961565b508482101561299e57868401515f19600387901b60f8161c191681555b50505050600190811b01905550565b60208082526018908201527f426f756e7479426f6172643a204e4f545f43524541544f520000000000000000604082015260600190565b60e081525f6129f660e083018a61226d565b88602084015287604084015261ffff8716606084015261ffff8616608084015282810360a0840152612a2881866123be565b915050612a3860c083018461259e565b98975050505050505050565b5f60018201612a5557612a556127be565b5060010190565b80820180821115610d6f57610d6f6127be565b60208082526025908201527f426f756e7479426f6172643a2057494e4e4552535f414c52454144595f53454c6040820152641150d5115160da1b606082015260800190565b60208082526024908201527f426f756e7479426f6172643a204e4f545f454e4f5547485f5041525449434950604082015263414e545360e01b606082015260800190565b602080825281018290525f8360408301825b85811015612b38576001600160a01b03612b2384611fca565b16825260209283019290910190600101612b0a565b5095945050505050565b8082028115828204841417610d6f57610d6f6127be565b5f82612b7357634e487b7160e01b5f52601260045260245ffd5b50049056fea264697066735822122094da6b8a8060dbae932a8f349963e31ad21cd8cc67ada2911a7098672f22aa8d64736f6c634300081c0033",
+        "sourceMap": "223:13618:22:-:0;;;658:36;;;;;;;;;-1:-1:-1;680:10:22;;1269:95:19;;1322:31;;-1:-1:-1;;;1322:31:19;;1350:1;1322:31;;;160:51:26;133:18;;1322:31:19;;;;;;;1269:95;1373:32;1392:12;1373:18;:32::i;:::-;-1:-1:-1;1857:1:21;2061:21;;223:13618:22;;2912:187:19;2985:16;3004:6;;-1:-1:-1;;;;;3020:17:19;;;-1:-1:-1;;;;;;3020:17:19;;;;;;3052:40;;3004:6;;;;;;;3052:40;;2985:16;3052:40;2975:124;2912:187;:::o;14:203:26:-;223:13618:22;;;;;;",
+        "linkReferences": {}
+    },
+    "deployedBytecode": {
+        "object": "0x60806040526004361061012b575f3560e01c8063715018a6116100a4578063a5e99c4e1161006b578063a5e99c4e1461035d578063ccf7c20a1461037c578063dc2f87441461039b578063e5e5dff1146103cf578063ee8c4bbf146103ee578063f2fde38b1461041a57005b8063715018a61461028a578063758d9b891461029e5780637dda8f80146102d75780638da5cb5b1461030b57806392af09621461033157005b8063429e2398116100f3578063429e2398146101c4578063439460c5146101f25780635af38890146102055780636591a18514610234578063666980b5146102605780636ca7f95c1461027557005b8063155482321461012d5780632b9234b9146101545780632e1a7d4d146101735780632f8feaf214610192578063342ec937146101b1575b005b348015610138575f5ffd5b50610141600581565b6040519081526020015b60405180910390f35b34801561015f575f5ffd5b5061014161016e366004611fe5565b610439565b34801561017e575f5ffd5b5061012b61018d36600461200d565b610464565b34801561019d575f5ffd5b5061012b6101ac3660046120d3565b610516565b61012b6101bf3660046121af565b6106ac565b3480156101cf575f5ffd5b506101e36101de36600461224d565b61083d565b60405161014b9392919061229b565b6101416102003660046122c8565b61090d565b348015610210575f5ffd5b5061022461021f366004612374565b610d49565b604051901515815260200161014b565b34801561023f575f5ffd5b5061025361024e36600461239e565b610d75565b60405161014b91906123f8565b34801561026b575f5ffd5b5061014160025481565b348015610280575f5ffd5b5061014160075481565b348015610295575f5ffd5b5061012b610dde565b3480156102a9575f5ffd5b506102246102b8366004612374565b600660209081525f928352604080842090915290825290205460ff1681565b3480156102e2575f5ffd5b506102f66102f136600461240a565b610df1565b6040805192835260208301919091520161014b565b348015610316575f5ffd5b505f546040516001600160a01b03909116815260200161014b565b34801561033c575f5ffd5b5061035061034b36600461200d565b610e3e565b60405161014b9190612443565b348015610368575f5ffd5b5061012b6103773660046124cf565b610f5d565b348015610387575f5ffd5b5061012b610396366004612512565b6111cc565b3480156103a6575f5ffd5b506103ba6103b536600461200d565b611428565b60405161014b999897969594939291906125be565b3480156103da575f5ffd5b5061012b6103e936600461200d565b611511565b3480156103f9575f5ffd5b5061040d61040836600461200d565b611733565b60405161014b9190612667565b348015610425575f5ffd5b5061012b61043436600461239e565b611992565b6004602052815f5260405f208181548110610452575f80fd5b905f5260205f20015f91509150505481565b61046c6119cf565b6007548111156104975760405162461bcd60e51b815260040161048e90612750565b60405180910390fd5b6040515f90339083908381818185875af1925050503d805f81146104d6576040519150601f19603f3d011682016040523d82523d5f602084013e6104db565b606091505b50509050806104fc5760405162461bcd60e51b815260040161048e90612787565b8160075f82825461050d91906127d2565b90915550505050565b5f838152600360205260409020600181015460ff166105475760405162461bcd60e51b815260040161048e906127e5565b336105945760405162461bcd60e51b815260206004820181905260248201527f426f756e7479426f6172643a20494e56414c49445f5041525449434950414e54604482015260640161048e565b600181015461010090046001600160a01b031633036105c55760405162461bcd60e51b815260040161048e9061281c565b5f8481526005602052604081208054849081106105e4576105e461285e565b5f91825260209091206001600390920201908101549091506001600160a01b0316331461065d5760405162461bcd60e51b815260206004820152602160248201527f426f756e7479426f6172643a204e4f545f5355424d495353494f4e5f4f574e456044820152602960f91b606482015260840161048e565b8061066885826128f3565b50847fe02fe9d7521de5f0f16e1f80c259fc29b05821d29519d689b87239a0452fa32e85334260405161069d9392919061229b565b60405180910390a25050505050565b6106b46119fb565b5f878152600360205260409020600181015460ff166106e55760405162461bcd60e51b815260040161048e906127e5565b600181015461010090046001600160a01b031633146107165760405162461bcd60e51b815260040161048e906129ad565b5f600882015460ff1660018111156107305761073061258a565b1461077d5760405162461bcd60e51b815260206004820181905260248201527f426f756e7479426f6172643a204e4f4e5f4544495441424c455f424f554e5459604482015260640161048e565b6002810161078b88826128f3565b50600381018690556004810185905560058101805461ffff858116620100000263ffffffff199092169087161717905581516107d09060068301906020850190611ec9565b506107da82611a25565b805460088201546040513392917f8bb4600c44290d6f2ffc2b5dcda5c870d35ec8d7176bff35c6353d717eecbf5991610822918c918c918c918c918c918c9160ff16906129e4565b60405180910390a35061083460018055565b50505050505050565b6005602052815f5260405f208181548110610856575f80fd5b905f5260205f2090600302015f9150915050805f01805461087690612872565b80601f01602080910402602001604051908101604052809291908181526020018280546108a290612872565b80156108ed5780601f106108c4576101008083540402835291602001916108ed565b820191905f5260205f20905b8154815290600101906020018083116108d057829003601f168201915b50505050600183015460029093015491926001600160a01b031691905083565b5f6109166119fb565b4287116109655760405162461bcd60e51b815260206004820152601a60248201527f426f756e7479426f6172643a20504153545f444541444c494e45000000000000604482015260640161048e565b8686116109c05760405162461bcd60e51b8152602060048201526024808201527f426f756e7479426f6172643a20494e56414c49445f524553554c545f444541446044820152634c494e4560e01b606482015260840161048e565b5f8561ffff1611610a135760405162461bcd60e51b815260206004820152601e60248201527f426f756e7479426f6172643a205a45524f5f5041525449434950414e54530000604482015260640161048e565b5f8461ffff1611610a665760405162461bcd60e51b815260206004820152601960248201527f426f756e7479426f6172643a205a45524f5f57494e4e45525300000000000000604482015260640161048e565b8361ffff16835114610ac65760405162461bcd60e51b8152602060048201526024808201527f426f756e7479426f6172643a205052495a45535f57494e4e4552535f4d49534d604482015263082a886960e31b606482015260840161048e565b610acf83611a25565b5f6040518061016001604052806002548152602001600115158152602001336001600160a01b031681526020018a81526020018981526020018881526020018761ffff1681526020018661ffff1681526020018581526020015f6001600160401b03811115610b4057610b40612024565b604051908082528060200260200182016040528015610b69578160200160208202803683370190505b508152602001846001811115610b8157610b8161258a565b9052600280545f908152600360209081526040918290208451815590840151600182018054938601516001600160a01b031661010002610100600160a81b0319921515929092166001600160a81b03199094169390931717909155606083015192935083929091820190610bf590826128f3565b506080820151600382015560a0820151600482015560c082015160058201805460e085015161ffff908116620100000263ffffffff199092169316929092179190911790556101008201518051610c56916006840191602090910190611ec9565b506101208201518051610c73916007840191602090910190611f12565b5061014082015160088201805460ff191660018381811115610c9757610c9761258a565b021790555050335f81815260046020908152604080832060028054825460018101845592865293909420019190915590549051919250907f420df0fd401f26642c4d43817ce1ecd5e2c2b223d6174c721d401c440520b20f90610d07908d908d908d908d908d908d908d906129e4565b60405180910390a360028054905f610d1e83612a44565b91905055506001600254610d3291906127d2565b915050610d3e60018055565b979650505050505050565b5f8281526006602090815260408083206001600160a01b038516845290915290205460ff165b92915050565b6001600160a01b0381165f90815260046020908152604091829020805483518184028101840190945280845260609392830182828015610dd257602002820191905f5260205f20905b815481526020019060010190808311610dbe575b50505050509050919050565b610de66119cf565b610def5f611a8e565b565b5f80805b8351811015610e2d57838181518110610e1057610e1061285e565b602002602001015183610e239190612a5c565b9250600101610df5565b50610e3782611add565b9050915091565b606060055f8381526020019081526020015f20805480602002602001604051908101604052809291908181526020015f905b82821015610f52578382905f5260205f2090600302016040518060600160405290815f82018054610ea090612872565b80601f0160208091040260200160405190810160405280929190818152602001828054610ecc90612872565b8015610f175780601f10610eee57610100808354040283529160200191610f17565b820191905f5260205f20905b815481529060010190602001808311610efa57829003601f168201915b50505091835250506001828101546001600160a01b031660208084019190915260029093015460409092019190915291835292019101610e70565b505050509050919050565b5f828152600360205260409020600181015460ff16610f8e5760405162461bcd60e51b815260040161048e906127e5565b33610fdb5760405162461bcd60e51b815260206004820181905260248201527f426f756e7479426f6172643a20494e56414c49445f5041525449434950414e54604482015260640161048e565b600181015461010090046001600160a01b0316330361100c5760405162461bcd60e51b815260040161048e9061281c565b80600301544211156110705760405162461bcd60e51b815260206004820152602760248201527f426f756e7479426f6172643a205355424d495353494f4e5f444541444c494e4560448201526617d41054d4d15160ca1b606482015260840161048e565b5f83815260066020908152604080832033845290915290205460ff16156110e35760405162461bcd60e51b815260206004820152602160248201527f426f756e7479426f6172643a20414c52454144595f50415254494349504154456044820152601160fa1b606482015260840161048e565b604080516060810182528381523360208083019190915242828401525f8681526005825292832080546001810182559084529220815191928392600390910290910190819061113290826128f3565b50602082810151600183810180546001600160a01b0319166001600160a01b03909316929092179091556040938401516002909301929092555f87815260068252838120338083529252839020805460ff1916909217909155905185917fb0208e8a030021485962b4e500febffb555f44a33144a13a214d2a039a624cbd916111be918791429061229b565b60405180910390a250505050565b5f838152600360205260409020600181015460ff166111fd5760405162461bcd60e51b815260040161048e906127e5565b600181015461010090046001600160a01b0316331461122e5760405162461bcd60e51b815260040161048e906129ad565b600581015462010000900461ffff16821461128b5760405162461bcd60e51b815260206004820152601d60248201527f426f756e7479426f6172643a2057494e4e4552535f4d49534d41544348000000604482015260640161048e565b6007810154156112ad5760405162461bcd60e51b815260040161048e90612a6f565b600581015461ffff168210156112d55760405162461bcd60e51b815260040161048e90612ab4565b80600401544211156113355760405162461bcd60e51b815260206004820152602360248201527f426f756e7479426f6172643a20524553554c545f444541444c494e455f50415360448201526214d15160ea1b606482015260840161048e565b806003015442101561139e5760405162461bcd60e51b815260206004820152602c60248201527f426f756e7479426f6172643a205355424d495353494f4e5f444541444c494e4560448201526b17d393d517d4915050d2115160a21b606482015260840161048e565b6113c083838360010160019054906101000a90046001600160a01b0316611af5565b6113cb848484611cdf565b6113d9838383600601611d9a565b6113e7600782018484611f65565b5060018101805460ff1916905560405184907f5fa006001f7473b386c7bb4db093cb973ce5c895e51c3813bdbd723097d0349e906111be9086908690612af8565b60036020525f9081526040902080546001820154600283018054929360ff8316936101009093046001600160a01b03169290919061146590612872565b80601f016020809104026020016040519081016040528092919081815260200182805461149190612872565b80156114dc5780601f106114b3576101008083540402835291602001916114dc565b820191905f5260205f20905b8154815290600101906020018083116114bf57829003601f168201915b505050506003830154600484015460058501546008909501549394919390925061ffff80831692620100009004169060ff1689565b5f818152600360205260409020600181015460ff166115425760405162461bcd60e51b815260040161048e906127e5565b600181015461010090046001600160a01b031633146115735760405162461bcd60e51b815260040161048e906129ad565b6007810154156115955760405162461bcd60e51b815260040161048e90612a6f565b5f828152600560208190526040909120549082015461ffff16116115cb5760405162461bcd60e51b815260040161048e90612ab4565b4281600401541061162f5760405162461bcd60e51b815260206004820152602860248201527f426f756e7479426f6172643a20524553554c545f444541444c494e455f4e4f5460448201526717d4915050d2115160c21b606482015260840161048e565b60018101805460ff191690555f805b600683015481101561167d5782600601818154811061165f5761165f61285e565b905f5260205f200154826116739190612a5c565b915060010161163e565b508047101561169e5760405162461bcd60e51b815260040161048e90612750565b6040515f90339083908381818185875af1925050503d805f81146116dd576040519150601f19603f3d011682016040523d82523d5f602084013e6116e2565b606091505b50509050806117035760405162461bcd60e51b815260040161048e90612787565b82546040517f92717314c0b0f9d632e1d46a0b8437778ff9daee1db8ec295f2bc0b57c4bcaac905f90a250505050565b61178e60408051610160810182525f8082526020820181905291810182905260608082018190526080820183905260a0820183905260c0820183905260e0820183905261010082018190526101208201529061014082015290565b5f8281526003602090815260409182902082516101608101845281548152600182015460ff81161515938201939093526101009092046001600160a01b0316928201929092526002820180549192916060840191906117ec90612872565b80601f016020809104026020016040519081016040528092919081815260200182805461181890612872565b80156118635780601f1061183a57610100808354040283529160200191611863565b820191905f5260205f20905b81548152906001019060200180831161184657829003601f168201915b505050918352505060038201546020808301919091526004830154604080840191909152600584015461ffff80821660608601526201000090910416608084015260068401805482518185028101850190935280835260a09094019391929091908301828280156118f157602002820191905f5260205f20905b8154815260200190600101908083116118dd575b505050505081526020016007820180548060200260200160405190810160405280929190818152602001828054801561195157602002820191905f5260205f20905b81546001600160a01b03168152600190910190602001808311611933575b5050509183525050600882015460209091019060ff1660018111156119785761197861258a565b60018111156119895761198961258a565b90525092915050565b61199a6119cf565b6001600160a01b0381166119c357604051631e4fbdf760e01b81525f600482015260240161048e565b6119cc81611a8e565b50565b5f546001600160a01b03163314610def5760405163118cdaa760e01b815233600482015260240161048e565b600260015403611a1e57604051633ee5aeb560e01b815260040160405180910390fd5b6002600155565b5f5f611a3083610df1565b9092509050611a3f8183612a5c565b341015611a735734611a518284612a5c565b604051630fde74bd60e01b81526004810192909252602482015260440161048e565b8060075f828254611a849190612a5c565b9091555050505050565b5f80546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b5f6064611aeb600584612b42565b610d6f9190612b59565b5f5b82811015611cd9575f848483818110611b1257611b1261285e565b9050602002016020810190611b27919061239e565b6001600160a01b031603611b7d5760405162461bcd60e51b815260206004820152601b60248201527f426f756e7479426f6172643a20494e56414c49445f57494e4e45520000000000604482015260640161048e565b816001600160a01b0316848483818110611b9957611b9961285e565b9050602002016020810190611bae919061239e565b6001600160a01b031603611c045760405162461bcd60e51b815260206004820152601f60248201527f426f756e7479426f6172643a2043524541544f525f43414e4e4f545f57494e00604482015260640161048e565b5f611c10826001612a5c565b90505b83811015611cd057848482818110611c2d57611c2d61285e565b9050602002016020810190611c42919061239e565b6001600160a01b0316858584818110611c5d57611c5d61285e565b9050602002016020810190611c72919061239e565b6001600160a01b031603611cc85760405162461bcd60e51b815260206004820152601f60248201527f426f756e7479426f6172643a2057494e4e4552535f4e4f545f554e4951554500604482015260640161048e565b600101611c13565b50600101611af7565b50505050565b5f5b81811015611cd9575f84815260066020526040812090848484818110611d0957611d0961285e565b9050602002016020810190611d1e919061239e565b6001600160a01b0316815260208101919091526040015f205460ff16611d925760405162461bcd60e51b815260206004820152602360248201527f426f756e7479426f6172643a2057494e4e45525f4e4f545f504152544943495060448201526210539560ea1b606482015260840161048e565b600101611ce1565b5f805b83811015611dd557828181548110611db757611db761285e565b905f5260205f20015482611dcb9190612a5c565b9150600101611d9d565b5080471015611df65760405162461bcd60e51b815260040161048e90612750565b5f5b83811015611ec2575f858583818110611e1357611e1361285e565b9050602002016020810190611e28919061239e565b90505f848381548110611e3d57611e3d61285e565b905f5260205f20015490505f826001600160a01b0316826040515f6040518083038185875af1925050503d805f8114611e91576040519150601f19603f3d011682016040523d82523d5f602084013e611e96565b606091505b5050905080611eb75760405162461bcd60e51b815260040161048e90612787565b505050600101611df8565b5050505050565b828054828255905f5260205f20908101928215611f02579160200282015b82811115611f02578251825591602001919060010190611ee7565b50611f0e929150611fb6565b5090565b828054828255905f5260205f20908101928215611f02579160200282015b82811115611f0257825182546001600160a01b0319166001600160a01b03909116178255602090920191600190910190611f30565b828054828255905f5260205f20908101928215611f02579160200282015b82811115611f025781546001600160a01b0319166001600160a01b03843516178255602090920191600190910190611f83565b5b80821115611f0e575f8155600101611fb7565b80356001600160a01b0381168114611fe0575f5ffd5b919050565b5f5f60408385031215611ff6575f5ffd5b611fff83611fca565b946020939093013593505050565b5f6020828403121561201d575f5ffd5b5035919050565b634e487b7160e01b5f52604160045260245ffd5b604051601f8201601f191681016001600160401b038111828210171561206057612060612024565b604052919050565b5f82601f830112612077575f5ffd5b81356001600160401b0381111561209057612090612024565b6120a3601f8201601f1916602001612038565b8181528460208386010111156120b7575f5ffd5b816020850160208301375f918101602001919091529392505050565b5f5f5f606084860312156120e5575f5ffd5b8335925060208401356001600160401b03811115612101575f5ffd5b61210d86828701612068565b93969395505050506040919091013590565b803561ffff81168114611fe0575f5ffd5b5f82601f83011261213f575f5ffd5b81356001600160401b0381111561215857612158612024565b8060051b61216860208201612038565b91825260208185018101929081019086841115612183575f5ffd5b6020860192505b838310156121a557823582526020928301929091019061218a565b9695505050505050565b5f5f5f5f5f5f5f60e0888a0312156121c5575f5ffd5b8735965060208801356001600160401b038111156121e1575f5ffd5b6121ed8a828b01612068565b965050604088013594506060880135935061220a6080890161211f565b925061221860a0890161211f565b915060c08801356001600160401b03811115612232575f5ffd5b61223e8a828b01612130565b91505092959891949750929550565b5f5f6040838503121561225e575f5ffd5b50508035926020909101359150565b5f81518084528060208401602086015e5f602082860101526020601f19601f83011685010191505092915050565b606081525f6122ad606083018661226d565b6001600160a01b039490941660208301525060400152919050565b5f5f5f5f5f5f5f60e0888a0312156122de575f5ffd5b87356001600160401b038111156122f3575f5ffd5b6122ff8a828b01612068565b975050602088013595506040880135945061231c6060890161211f565b935061232a6080890161211f565b925060a08801356001600160401b03811115612344575f5ffd5b6123508a828b01612130565b92505060c088013560028110612364575f5ffd5b8091505092959891949750929550565b5f5f60408385031215612385575f5ffd5b8235915061239560208401611fca565b90509250929050565b5f602082840312156123ae575f5ffd5b6123b782611fca565b9392505050565b5f8151808452602084019350602083015f5b828110156123ee5781518652602095860195909101906001016123d0565b5093949350505050565b602081525f6123b760208301846123be565b5f6020828403121561241a575f5ffd5b81356001600160401b0381111561242f575f5ffd5b61243b84828501612130565b949350505050565b5f602082016020835280845180835260408501915060408160051b8601019250602086015f5b828110156124c357603f19878603018452815180516060875261248f606088018261226d565b6020838101516001600160a01b03168982015260409384015193909801929092525094938401939190910190600101612469565b50929695505050505050565b5f5f604083850312156124e0575f5ffd5b8235915060208301356001600160401b038111156124fc575f5ffd5b61250885828601612068565b9150509250929050565b5f5f5f60408486031215612524575f5ffd5b8335925060208401356001600160401b03811115612540575f5ffd5b8401601f81018613612550575f5ffd5b80356001600160401b03811115612565575f5ffd5b8660208260051b8401011115612579575f5ffd5b939660209190910195509293505050565b634e487b7160e01b5f52602160045260245ffd5b600281106125ba57634e487b7160e01b5f52602160045260245ffd5b9052565b89815288151560208201526001600160a01b0388166040820152610120606082018190525f906125f09083018961226d565b90508660808301528560a083015261ffff851660c083015261ffff841660e083015261262061010083018461259e565b9a9950505050505050505050565b5f8151808452602084019350602083015f5b828110156123ee5781516001600160a01b0316865260209586019590910190600101612640565b60208152815160208201525f6020830151612686604084018215159052565b5060408301516001600160a01b038116606084015250606083015161016060808401526126b761018084018261226d565b9050608084015160a084015260a084015160c084015260c08401516126e260e085018261ffff169052565b5060e084015161ffff811661010085015250610100840151838203601f190161012085015261271182826123be565b915050610120840151601f1984830301610140850152612731828261262e565b91505061014084015161274861016085018261259e565b509392505050565b6020808252601f908201527f426f756e7479426f6172643a20494e53554646494349454e545f46554e445300604082015260600190565b6020808252601c908201527f426f756e7479426f6172643a205452414e534645525f4641494c454400000000604082015260600190565b634e487b7160e01b5f52601160045260245ffd5b81810381811115610d6f57610d6f6127be565b6020808252601d908201527f426f756e7479426f6172643a20424f554e54595f4e4f545f464f554e44000000604082015260600190565b60208082526022908201527f426f756e7479426f6172643a2043524541544f525f43414e4e4f545f5355424d604082015261125560f21b606082015260800190565b634e487b7160e01b5f52603260045260245ffd5b600181811c9082168061288657607f821691505b6020821081036128a457634e487b7160e01b5f52602260045260245ffd5b50919050565b601f8211156128ee57805f5260205f20601f840160051c810160208510156128cf5750805b601f840160051c820191505b81811015611ec2575f81556001016128db565b505050565b81516001600160401b0381111561290c5761290c612024565b6129208161291a8454612872565b846128aa565b6020601f821160018114612952575f831561293b5750848201515b5f19600385901b1c1916600184901b178455611ec2565b5f84815260208120601f198516915b828110156129815787850151825560209485019460019092019101612961565b508482101561299e57868401515f19600387901b60f8161c191681555b50505050600190811b01905550565b60208082526018908201527f426f756e7479426f6172643a204e4f545f43524541544f520000000000000000604082015260600190565b60e081525f6129f660e083018a61226d565b88602084015287604084015261ffff8716606084015261ffff8616608084015282810360a0840152612a2881866123be565b915050612a3860c083018461259e565b98975050505050505050565b5f60018201612a5557612a556127be565b5060010190565b80820180821115610d6f57610d6f6127be565b60208082526025908201527f426f756e7479426f6172643a2057494e4e4552535f414c52454144595f53454c6040820152641150d5115160da1b606082015260800190565b60208082526024908201527f426f756e7479426f6172643a204e4f545f454e4f5547485f5041525449434950604082015263414e545360e01b606082015260800190565b602080825281018290525f8360408301825b85811015612b38576001600160a01b03612b2384611fca565b16825260209283019290910190600101612b0a565b5095945050505050565b8082028115828204841417610d6f57610d6f6127be565b5f82612b7357634e487b7160e01b5f52601260045260245ffd5b50049056fea264697066735822122094da6b8a8060dbae932a8f349963e31ad21cd8cc67ada2911a7098672f22aa8d64736f6c634300081c0033",
+        "sourceMap": "223:13618:22:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;292:51;;;;;;;;;;;;342:1;292:51;;;;;160:25:26;;;148:2;133:18;292:51:22;;;;;;;;434:49;;;;;;;;;;-1:-1:-1;434:49:22;;;;;:::i;:::-;;:::i;13468:301::-;;;;;;;;;;-1:-1:-1;13468:301:22;;;;;:::i;:::-;;:::i;10137:689::-;;;;;;;;;;-1:-1:-1;10137:689:22;;;;;:::i;:::-;;:::i;4852:1118::-;;;;;;:::i;:::-;;:::i;489:57::-;;;;;;;;;;-1:-1:-1;489:57:22;;;;;:::i;:::-;;:::i;:::-;;;;;;;;;:::i;1191:1620::-;;;;;;:::i;:::-;;:::i;13161:161::-;;;;;;;;;;-1:-1:-1;13161:161:22;;;;;:::i;:::-;;:::i;:::-;;;7292:14:26;;7285:22;7267:41;;7255:2;7240:18;13161:161:22;7127:187:26;12461:128:22;;;;;;;;;;-1:-1:-1;12461:128:22;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;349:30::-;;;;;;;;;;;;;;;;624:27;;;;;;;;;;;;;;;;2293:101:19;;;;;;;;;;;;;:::i;552:65:22:-;;;;;;;;;;-1:-1:-1;552:65:22;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;3067:413;;;;;;;;;;-1:-1:-1;3067:413:22;;;;;:::i;:::-;;:::i;:::-;;;;8728:25:26;;;8784:2;8769:18;;8762:34;;;;8701:18;3067:413:22;8554:248:26;1638:85:19;;;;;;;;;;-1:-1:-1;1684:7:19;1710:6;1638:85;;-1:-1:-1;;;;;1710:6:19;;;8953:51:26;;8941:2;8926:18;1638:85:19;8807:203:26;12767:143:22;;;;;;;;;;-1:-1:-1;12767:143:22;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;9016:875::-;;;;;;;;;;-1:-1:-1;9016:875:22;;;;;:::i;:::-;;:::i;6189:1060::-;;;;;;;;;;-1:-1:-1;6189:1060:22;;;;;:::i;:::-;;:::i;386:42::-;;;;;;;;;;-1:-1:-1;386:42:22;;;;;:::i;:::-;;:::i;:::-;;;;;;;;;;;;;;;:::i;10943:1040::-;;;;;;;;;;-1:-1:-1;10943:1040:22;;;;;:::i;:::-;;:::i;12155:117::-;;;;;;;;;;-1:-1:-1;12155:117:22;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;2543:215:19:-;;;;;;;;;;-1:-1:-1;2543:215:19;;;;;:::i;:::-;;:::i;434:49:22:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;13468:301::-;1531:13:19;:11;:13::i;:::-;13560:12:22::1;;13549:7;:23;;13541:67;;;;-1:-1:-1::0;;;13541:67:22::1;;;;;;;:::i;:::-;;;;;;;;;13636:35;::::0;13619:12:::1;::::0;13636:10:::1;::::0;13659:7;;13619:12;13636:35;13619:12;13636:35;13659:7;13636:10;:35:::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;13618:53;;;13689:7;13681:48;;;;-1:-1:-1::0;;;13681:48:22::1;;;;;;;:::i;:::-;13755:7;13739:12;;:23;;;;;;;:::i;:::-;::::0;;;-1:-1:-1;;;;13468:301:22:o;10137:689::-;10253:21;10277:19;;;:8;:19;;;;;10314:15;;;;;;10306:57;;;;-1:-1:-1;;;10306:57:22;;;;;;;:::i;:::-;10381:10;10373:69;;;;-1:-1:-1;;;10373:69:22;;16423:2:26;10373:69:22;;;16405:21:26;;;16442:18;;;16435:30;16501:34;16481:18;;;16474:62;16553:18;;10373:69:22;16221:356:26;10373:69:22;10474:14;;;;;;;-1:-1:-1;;;;;10474:14:22;10460:10;:28;10452:75;;;;-1:-1:-1;;;10452:75:22;;;;;;;:::i;:::-;10538:29;10570:28;;;:17;:28;;;;;:46;;10599:16;;10570:46;;;;;;:::i;:::-;;;;;;;;;10634:22;10570:46;;;;;10634:22;;;;10570:46;;-1:-1:-1;;;;;;10634:22:22;10660:10;10634:36;10626:82;;;;-1:-1:-1;;;10626:82:22;;17319:2:26;10626:82:22;;;17301:21:26;17358:2;17338:18;;;17331:30;17397:34;17377:18;;;17370:62;-1:-1:-1;;;17448:18:26;;;17441:31;17489:19;;10626:82:22;17117:397:26;10626:82:22;10719:10;:21;10736:4;10719:10;:21;:::i;:::-;;10774:9;10756:63;10785:4;10791:10;10803:15;10756:63;;;;;;;;:::i;:::-;;;;;;;;10243:583;;10137:689;;;:::o;4852:1118::-;2500:21:21;:19;:21::i;:::-;5139::22::1;5163:19:::0;;;:8:::1;:19;::::0;;;;5200:15:::1;::::0;::::1;::::0;::::1;;5192:57;;;;-1:-1:-1::0;;;5192:57:22::1;;;;;;;:::i;:::-;5267:14;::::0;::::1;::::0;::::1;::::0;::::1;-1:-1:-1::0;;;;;5267:14:22::1;5285:10;5267:28;5259:65;;;;-1:-1:-1::0;;;5259:65:22::1;;;;;;;:::i;:::-;5363:19;5342:17;::::0;::::1;::::0;::::1;;::::0;:40;::::1;;;;;;:::i;:::-;;5334:85;;;::::0;-1:-1:-1;;;5334:85:22;;20583:2:26;5334:85:22::1;::::0;::::1;20565:21:26::0;;;20602:18;;;20595:30;20661:34;20641:18;;;20634:62;20713:18;;5334:85:22::1;20381:356:26::0;5334:85:22::1;5430:10;::::0;::::1;:17;5443:4:::0;5430:10;:17:::1;:::i;:::-;-1:-1:-1::0;5457:15:22::1;::::0;::::1;:27:::0;;;5494:21:::1;::::0;::::1;:39:::0;;;5543:22:::1;::::0;::::1;:41:::0;;::::1;5594:35:::0;;::::1;::::0;::::1;-1:-1:-1::0;;5594:35:22;;;5543:41;;::::1;5594:35:::0;::::1;::::0;;5639:23;;::::1;::::0;:13:::1;::::0;::::1;::::0;:23:::1;::::0;::::1;::::0;::::1;:::i;:::-;;5673:25;5690:7;5673:16;:25::i;:::-;5741:9:::0;;5936:17:::1;::::0;::::1;::::0;5714:249:::1;::::0;5764:10:::1;::::0;5741:9;5714:249:::1;::::0;::::1;::::0;5788:4;;5806:9;;5829:15;;5858:16;;5888:13;;5915:7;;5936:17:::1;;::::0;5714:249:::1;:::i;:::-;;;;;;;;5129:841;2542:20:21::0;1857:1;3068:21;;2888:208;2542:20;4852:1118:22;;;;;;;:::o;489:57::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;489:57:22;;;;;;;;;;;-1:-1:-1;;;;;489:57:22;;;-1:-1:-1;489:57:22;:::o;1191:1620::-;1484:7;2500:21:21;:19;:21::i;:::-;1523:15:22::1;1511:9;:27;1503:66;;;::::0;-1:-1:-1;;;1503:66:22;;21789:2:26;1503:66:22::1;::::0;::::1;21771:21:26::0;21828:2;21808:18;;;21801:30;21867:28;21847:18;;;21840:56;21913:18;;1503:66:22::1;21587:350:26::0;1503:66:22::1;1605:9;1587:15;:27;1579:76;;;::::0;-1:-1:-1;;;1579:76:22;;22144:2:26;1579:76:22::1;::::0;::::1;22126:21:26::0;22183:2;22163:18;;;22156:30;22222:34;22202:18;;;22195:62;-1:-1:-1;;;22273:18:26;;;22266:34;22317:19;;1579:76:22::1;21942:400:26::0;1579:76:22::1;1692:1;1673:16;:20;;;1665:63;;;::::0;-1:-1:-1;;;1665:63:22;;22549:2:26;1665:63:22::1;::::0;::::1;22531:21:26::0;22588:2;22568:18;;;22561:30;22627:32;22607:18;;;22600:60;22677:18;;1665:63:22::1;22347:354:26::0;1665:63:22::1;1762:1;1746:13;:17;;;1738:55;;;::::0;-1:-1:-1;;;1738:55:22;;22908:2:26;1738:55:22::1;::::0;::::1;22890:21:26::0;22947:2;22927:18;;;22920:30;22986:27;22966:18;;;22959:55;23031:18;;1738:55:22::1;22706:349:26::0;1738:55:22::1;1829:13;1811:31;;:7;:14;:31;1803:80;;;::::0;-1:-1:-1;;;1803:80:22;;23262:2:26;1803:80:22::1;::::0;::::1;23244:21:26::0;23301:2;23281:18;;;23274:30;23340:34;23320:18;;;23313:62;-1:-1:-1;;;23391:18:26;;;23384:34;23435:19;;1803:80:22::1;23060:400:26::0;1803:80:22::1;1894:25;1911:7;1894:16;:25::i;:::-;1930:23;1956:414;;;;;;;;1981:15;;1956:414;;;;2020:4;1956:414;;;;;;2047:10;-1:-1:-1::0;;;;;1956:414:22::1;;;;;2076:4;1956:414;;;;2104:9;1956:414;;;;2143:15;1956:414;;;;2189:16;1956:414;;;;;;2233:13;1956:414;;;;;;2268:7;1956:414;;;;2320:1;-1:-1:-1::0;;;;;2306:16:22::1;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;::::0;-1:-1:-1;2306:16:22::1;;1956:414;;;;2348:11;1956:414;;;;;;;;:::i;:::-;::::0;;2390:15:::1;::::0;;2381:25:::1;::::0;;;:8:::1;:25;::::0;;;;;;;;:37;;;;;;::::1;::::0;::::1;::::0;::::1;::::0;;;;::::1;::::0;-1:-1:-1;;;;;2381:37:22::1;;;-1:-1:-1::0;;;;;;2381:37:22;::::1;;::::0;;;;-1:-1:-1;;;;;;2381:37:22;;;;;;;::::1;::::0;;;::::1;::::0;::::1;::::0;1930:440;;-1:-1:-1;1930:440:22;;2381:25;;:37;::::1;::::0;::::1;::::0;;::::1;:::i;:::-;-1:-1:-1::0;2381:37:22::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;;::::1;::::0;::::1;::::0;::::1;::::0;;::::1;::::0;::::1;-1:-1:-1::0;;2381:37:22;;;;::::1;::::0;;;;;;;::::1;::::0;;::::1;::::0;::::1;::::0;;;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;;::::1;::::0;::::1;:::i;:::-;-1:-1:-1::0;2381:37:22::1;::::0;::::1;::::0;;;::::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;;::::1;::::0;::::1;:::i;:::-;-1:-1:-1::0;2381:37:22::1;::::0;::::1;::::0;::::1;::::0;::::1;::::0;;-1:-1:-1;;2381:37:22::1;::::0;;;;::::1;;;;;;:::i;:::-;;;::::0;;-1:-1:-1;;2441:10:22::1;2428:24;::::0;;;:12:::1;:24;::::0;;;;;;;2458:15:::1;::::0;;2428:46;;::::1;::::0;::::1;::::0;;;;;;;;;::::1;::::0;;;;2517:15;;2490:249;;2441:10;;-1:-1:-1;2517:15:22;2490:249:::1;::::0;::::1;::::0;2570:4;;2588:9;;2611:15;;2640:16;;2670:13;;2697:7;;2718:11;;2490:249:::1;:::i;:::-;;;;;;;;2750:15;:17:::0;;;:15:::1;:17;::::0;::::1;:::i;:::-;;;;;;2803:1;2785:15;;:19;;;;:::i;:::-;2778:26;;;2542:20:21::0;1857:1;3068:21;;2888:208;2542:20;1191:1620:22;;;;;;;;;:::o;13161:161::-;13254:4;13277:24;;;:13;:24;;;;;;;;-1:-1:-1;;;;;13277:38:22;;;;;;;;;;;;13161:161;;;;;:::o;12461:128::-;-1:-1:-1;;;;;12560:22:22;;;;;;:12;:22;;;;;;;;;12553:29;;;;;;;;;;;;;;;;;12525:16;;12553:29;;;12560:22;12553:29;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;12461:128;;;:::o;2293:101:19:-;1531:13;:11;:13::i;:::-;2357:30:::1;2384:1;2357:18;:30::i;:::-;2293:101::o:0;3067:413:22:-;3169:24;;;3261:100;3285:7;:14;3281:1;:18;3261:100;;;3340:7;3348:1;3340:10;;;;;;;;:::i;:::-;;;;;;;3320:30;;;;;:::i;:::-;;-1:-1:-1;3301:3:22;;3261:100;;;;3385:39;3407:16;3385:21;:39::i;:::-;3371:53;;3067:413;;;:::o;12767:143::-;12837:19;12875:17;:28;12893:9;12875:28;;;;;;;;;;;12868:35;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;12868:35:22;;;-1:-1:-1;;12868:35:22;;;;;-1:-1:-1;;;;;12868:35:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;12767:143;;;:::o;9016:875::-;9109:21;9133:19;;;:8;:19;;;;;9170:15;;;;;;9162:57;;;;-1:-1:-1;;;9162:57:22;;;;;;;:::i;:::-;9237:10;9229:69;;;;-1:-1:-1;;;9229:69:22;;16423:2:26;9229:69:22;;;16405:21:26;;;16442:18;;;16435:30;16501:34;16481:18;;;16474:62;16553:18;;9229:69:22;16221:356:26;9229:69:22;9330:14;;;;;;;-1:-1:-1;;;;;9330:14:22;9316:10;:28;9308:75;;;;-1:-1:-1;;;9308:75:22;;;;;;;:::i;:::-;9420:6;:15;;;9401;:34;;9393:86;;;;-1:-1:-1;;;9393:86:22;;23937:2:26;9393:86:22;;;23919:21:26;23976:2;23956:18;;;23949:30;24015:34;23995:18;;;23988:62;-1:-1:-1;;;24066:18:26;;;24059:37;24113:19;;9393:86:22;23735:403:26;9393:86:22;9498:24;;;;:13;:24;;;;;;;;9523:10;9498:36;;;;;;;;;;9497:37;9489:83;;;;-1:-1:-1;;;9489:83:22;;24345:2:26;9489:83:22;;;24327:21:26;24384:2;24364:18;;;24357:30;24423:34;24403:18;;;24396:62;-1:-1:-1;;;24474:18:26;;;24467:31;24515:19;;9489:83:22;24143:397:26;9489:83:22;9617:76;;;;;;;;;;;9653:10;9617:76;;;;;;;;9676:15;9617:76;;;;9583:31;9704:28;;;:17;:28;;;;;:48;;;;;;;;;;;;;;9617:76;;;;9704:48;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;9704:48:22;;;;;;;;;;;-1:-1:-1;;;;;;9704:48:22;-1:-1:-1;;;;;9704:48:22;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;9762:24:22;;;:13;:24;;;;;9787:10;9762:36;;;;;;;;:43;;-1:-1:-1;;9762:43:22;;;;;;;9821:63;;9762:24;;9821:63;;;;9850:4;;9868:15;;9821:63;:::i;:::-;;;;;;;;9099:792;;9016:875;;:::o;6189:1060::-;6288:21;6312:19;;;:8;:19;;;;;6350:15;;;;;;6342:57;;;;-1:-1:-1;;;6342:57:22;;;;;;;:::i;:::-;6417:14;;;;;;;-1:-1:-1;;;;;6417:14:22;6435:10;6417:28;6409:65;;;;-1:-1:-1;;;6409:65:22;;;;;;;:::i;:::-;6511:19;;;;;;;;;6492:38;;6484:80;;;;-1:-1:-1;;;6484:80:22;;24747:2:26;6484:80:22;;;24729:21:26;24786:2;24766:18;;;24759:30;24825:31;24805:18;;;24798:59;24874:18;;6484:80:22;24545:353:26;6484:80:22;6582:22;;;:29;:34;6574:84;;;;-1:-1:-1;;;6574:84:22;;;;;;;:::i;:::-;6676:22;;;;;;:41;-1:-1:-1;6676:41:22;6668:90;;;;-1:-1:-1;;;6668:90:22;;;;;;;:::i;:::-;6795:6;:21;;;6776:15;:40;;6768:88;;;;-1:-1:-1;;;6768:88:22;;25916:2:26;6768:88:22;;;25898:21:26;25955:2;25935:18;;;25928:30;25994:34;25974:18;;;25967:62;-1:-1:-1;;;26045:18:26;;;26038:33;26088:19;;6768:88:22;25714:399:26;6768:88:22;6893:6;:15;;;6874;:34;;6866:91;;;;-1:-1:-1;;;6866:91:22;;26320:2:26;6866:91:22;;;26302:21:26;26359:2;26339:18;;;26332:30;26398:34;26378:18;;;26371:62;-1:-1:-1;;;26449:18:26;;;26442:42;26501:19;;6866:91:22;26118:408:26;6866:91:22;6968:42;6985:8;;6995:6;:14;;;;;;;;;;-1:-1:-1;;;;;6995:14:22;6968:16;:42::i;:::-;7021:40;7041:9;7052:8;;7021:19;:40::i;:::-;7072:42;7090:8;;7100:6;:13;;7072:17;:42::i;:::-;7125:33;:22;;;7150:8;;7125:33;:::i;:::-;-1:-1:-1;7168:15:22;;;:23;;-1:-1:-1;;7168:23:22;;;7206:36;;7222:9;;7206:36;;;;7233:8;;;;7206:36;:::i;386:42::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;386:42:22;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;386:42:22;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;386:42:22;;;;;;;;;;;;;:::o;10943:1040::-;11012:21;11036:19;;;:8;:19;;;;;11073:15;;;;;;11065:57;;;;-1:-1:-1;;;11065:57:22;;;;;;;:::i;:::-;11140:14;;;;;;;-1:-1:-1;;;;;11140:14:22;11158:10;11140:28;11132:65;;;;-1:-1:-1;;;11132:65:22;;;;;;;:::i;:::-;11215:22;;;:29;:34;11207:84;;;;-1:-1:-1;;;11207:84:22;;;;;;;:::i;:::-;11334:28;;;;:17;:28;;;;;;;;:35;11309:22;;;;;;:60;11301:109;;;;-1:-1:-1;;;11301:109:22;;;;;;;:::i;:::-;11452:15;11428:6;:21;;;:39;11420:92;;;;-1:-1:-1;;;11420:92:22;;27353:2:26;11420:92:22;;;27335:21:26;27392:2;27372:18;;;27365:30;27431:34;27411:18;;;27404:62;-1:-1:-1;;;27482:18:26;;;27475:38;27530:19;;11420:92:22;27151:404:26;11420:92:22;11523:15;;;:23;;-1:-1:-1;;11523:23:22;;;11541:5;;11615:106;11639:13;;;:20;11635:24;;11615:106;;;11694:6;:13;;11708:1;11694:16;;;;;;;;:::i;:::-;;;;;;;;;11680:30;;;;;:::i;:::-;;-1:-1:-1;11661:3:22;;11615:106;;;;11764:10;11739:21;:35;;11731:79;;;;-1:-1:-1;;;11731:79:22;;;;;;;:::i;:::-;11838:38;;11821:12;;11838:10;;11861;;11821:12;11838:38;11821:12;11838:38;11861:10;11838;:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;11820:56;;;11894:7;11886:48;;;;-1:-1:-1;;;11886:48:22;;;;;;;:::i;:::-;11966:9;;11950:26;;;;11966:9;;11950:26;11002:981;;;10943:1040;:::o;12155:117::-;12214:13;-1:-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;12214:13:22;12246:19;;;;:8;:19;;;;;;;;;12239:26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;12239:26:22;;;;;;;;;;;;;;;12246:19;12239:26;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;12239:26:22;;;-1:-1:-1;;12239:26:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;12239:26:22;;;;;;;;;;;;;;;;-1:-1:-1;;;12239:26:22;;;-1:-1:-1;;12239:26:22;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;:::i;:::-;;;-1:-1:-1;12239:26:22;12155:117;-1:-1:-1;;12155:117:22:o;2543:215:19:-;1531:13;:11;:13::i;:::-;-1:-1:-1;;;;;2627:22:19;::::1;2623:91;;2672:31;::::0;-1:-1:-1;;;2672:31:19;;2700:1:::1;2672:31;::::0;::::1;8953:51:26::0;8926:18;;2672:31:19::1;8807:203:26::0;2623:91:19::1;2723:28;2742:8;2723:18;:28::i;:::-;2543:215:::0;:::o;1796:162::-;1684:7;1710:6;-1:-1:-1;;;;;1710:6:19;735:10:20;1855:23:19;1851:101;;1901:40;;-1:-1:-1;;;1901:40:19;;735:10:20;1901:40:19;;;8953:51:26;8926:18;;1901:40:19;8807:203:26;2575:307:21;1899:1;2702:7;;:18;2698:86;;2743:30;;-1:-1:-1;;;2743:30:21;;;;;;;;;;;2698:86;1899:1;2858:7;:17;2575:307::o;4001:357:22:-;4073:24;4099:19;4122:30;4144:7;4122:21;:30::i;:::-;4072:80;;-1:-1:-1;4072:80:22;-1:-1:-1;4178:30:22;4072:80;;4178:30;:::i;:::-;4166:9;:42;4162:153;;;4262:9;4273:30;4292:11;4273:16;:30;:::i;:::-;4231:73;;-1:-1:-1;;;4231:73:22;;;;;8728:25:26;;;;8769:18;;;8762:34;8701:18;;4231:73:22;8554:248:26;4162:153:22;4340:11;4324:12;;:27;;;;;;;:::i;:::-;;;;-1:-1:-1;;;;;4001:357:22:o;2912:187:19:-;2985:16;3004:6;;-1:-1:-1;;;;;3020:17:19;;;-1:-1:-1;;;;;;3020:17:19;;;;;;3052:40;;3004:6;;;;;;;3052:40;;2985:16;3052:40;2975:124;2912:187;:::o;3676:145:22:-;3747:7;3811:3;3774:33;342:1;3774:7;:33;:::i;:::-;3773:41;;;;:::i;7330:487::-;7432:9;7427:384;7447:19;;;7427:384;;;7518:1;7495:8;;7504:1;7495:11;;;;;;;:::i;:::-;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;;;;;7495:25:22;;7487:65;;;;-1:-1:-1;;;7487:65:22;;28157:2:26;7487:65:22;;;28139:21:26;28196:2;28176:18;;;28169:30;28235:29;28215:18;;;28208:57;28282:18;;7487:65:22;27955:351:26;7487:65:22;7589:8;-1:-1:-1;;;;;7574:23:22;:8;;7583:1;7574:11;;;;;;;:::i;:::-;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;;;;;7574:23:22;;7566:67;;;;-1:-1:-1;;;7566:67:22;;28513:2:26;7566:67:22;;;28495:21:26;28552:2;28532:18;;;28525:30;28591:33;28571:18;;;28564:61;28642:18;;7566:67:22;28311:355:26;7566:67:22;7653:9;7665:5;:1;7669;7665:5;:::i;:::-;7653:17;;7648:153;7672:19;;;7648:153;;;7739:8;;7748:1;7739:11;;;;;;;:::i;:::-;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;;;;;7724:26:22;:8;;7733:1;7724:11;;;;;;;:::i;:::-;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;;;;;7724:26:22;;7716:70;;;;-1:-1:-1;;;7716:70:22;;28873:2:26;7716:70:22;;;28855:21:26;28912:2;28892:18;;;28885:30;28951:33;28931:18;;;28924:61;29002:18;;7716:70:22;28671:355:26;7716:70:22;7693:3;;7648:153;;;-1:-1:-1;7468:3:22;;7427:384;;;;7330:487;;;:::o;7908:263::-;8014:9;8009:156;8029:19;;;8009:156;;;8077:24;;;;:13;:24;;;;;;8102:8;;8111:1;8102:11;;;;;;;:::i;:::-;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;;;;;8077:37:22;;;;;;;;;;;;-1:-1:-1;8077:37:22;;;;8069:85;;;;-1:-1:-1;;;8069:85:22;;29233:2:26;8069:85:22;;;29215:21:26;29272:2;29252:18;;;29245:30;29311:34;29291:18;;;29284:62;-1:-1:-1;;;29362:18:26;;;29355:33;29405:19;;8069:85:22;29031:399:26;8069:85:22;8050:3;;8009:156;;8244:593;8346:18;;8374:95;8394:19;;;8374:95;;;8448:7;8456:1;8448:10;;;;;;;;:::i;:::-;;;;;;;;;8434:24;;;;;:::i;:::-;;-1:-1:-1;8415:3:22;;8374:95;;;;8511:10;8486:21;:35;;8478:79;;;;-1:-1:-1;;;8478:79:22;;;;;;;:::i;:::-;8573:9;8568:263;8588:19;;;8568:263;;;8628:14;8645:8;;8654:1;8645:11;;;;;;;:::i;:::-;;;;;;;;;;;;;;:::i;:::-;8628:28;;8670:13;8686:7;8694:1;8686:10;;;;;;;;:::i;:::-;;;;;;;;;8670:26;;8712:12;8729:6;-1:-1:-1;;;;;8729:11:22;8748:5;8729:29;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8711:47;;;8780:7;8772:48;;;;-1:-1:-1;;;8772:48:22;;;;;;;:::i;:::-;-1:-1:-1;;;8609:3:22;;8568:263;;;;8336:501;8244:593;;;:::o;-1:-1:-1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;196:173:26;264:20;;-1:-1:-1;;;;;313:31:26;;303:42;;293:70;;359:1;356;349:12;293:70;196:173;;;:::o;374:300::-;442:6;450;503:2;491:9;482:7;478:23;474:32;471:52;;;519:1;516;509:12;471:52;542:29;561:9;542:29;:::i;:::-;532:39;640:2;625:18;;;;612:32;;-1:-1:-1;;;374:300:26:o;679:226::-;738:6;791:2;779:9;770:7;766:23;762:32;759:52;;;807:1;804;797:12;759:52;-1:-1:-1;852:23:26;;679:226;-1:-1:-1;679:226:26:o;910:127::-;971:10;966:3;962:20;959:1;952:31;1002:4;999:1;992:15;1026:4;1023:1;1016:15;1042:275;1113:2;1107:9;1178:2;1159:13;;-1:-1:-1;;1155:27:26;1143:40;;-1:-1:-1;;;;;1198:34:26;;1234:22;;;1195:62;1192:88;;;1260:18;;:::i;:::-;1296:2;1289:22;1042:275;;-1:-1:-1;1042:275:26:o;1322:559::-;1365:5;1418:3;1411:4;1403:6;1399:17;1395:27;1385:55;;1436:1;1433;1426:12;1385:55;1476:6;1463:20;-1:-1:-1;;;;;1498:6:26;1495:30;1492:56;;;1528:18;;:::i;:::-;1572:59;1619:2;1596:17;;-1:-1:-1;;1592:31:26;1625:4;1588:42;1572:59;:::i;:::-;1656:6;1647:7;1640:23;1710:3;1703:4;1694:6;1686;1682:19;1678:30;1675:39;1672:59;;;1727:1;1724;1717:12;1672:59;1792:6;1785:4;1777:6;1773:17;1766:4;1757:7;1753:18;1740:59;1848:1;1819:20;;;1841:4;1815:31;1808:42;;;;1823:7;1322:559;-1:-1:-1;;;1322:559:26:o;1886:556::-;1973:6;1981;1989;2042:2;2030:9;2021:7;2017:23;2013:32;2010:52;;;2058:1;2055;2048:12;2010:52;2103:23;;;-1:-1:-1;2201:2:26;2186:18;;2173:32;-1:-1:-1;;;;;2217:30:26;;2214:50;;;2260:1;2257;2250:12;2214:50;2283;2325:7;2316:6;2305:9;2301:22;2283:50;:::i;:::-;1886:556;;2273:60;;-1:-1:-1;;;;2406:2:26;2391:18;;;;2378:32;;1886:556::o;2447:159::-;2514:20;;2574:6;2563:18;;2553:29;;2543:57;;2596:1;2593;2586:12;2611:775;2665:5;2718:3;2711:4;2703:6;2699:17;2695:27;2685:55;;2736:1;2733;2726:12;2685:55;2776:6;2763:20;-1:-1:-1;;;;;2798:6:26;2795:30;2792:56;;;2828:18;;:::i;:::-;2874:6;2871:1;2867:14;2901:30;2925:4;2921:2;2917:13;2901:30;:::i;:::-;2967:19;;;3011:4;3043:15;;;3039:26;;;3002:14;;;;3077:15;;;3074:35;;;3105:1;3102;3095:12;3074:35;3141:4;3133:6;3129:17;3118:28;;3155:200;3171:6;3166:3;3163:15;3155:200;;;3263:17;;3293:18;;3340:4;3188:14;;;;3331;;;;3155:200;;;3373:7;2611:775;-1:-1:-1;;;;;;2611:775:26:o;3391:1066::-;3537:6;3545;3553;3561;3569;3577;3585;3638:3;3626:9;3617:7;3613:23;3609:33;3606:53;;;3655:1;3652;3645:12;3606:53;3700:23;;;-1:-1:-1;3798:2:26;3783:18;;3770:32;-1:-1:-1;;;;;3814:30:26;;3811:50;;;3857:1;3854;3847:12;3811:50;3880;3922:7;3913:6;3902:9;3898:22;3880:50;:::i;:::-;3870:60;-1:-1:-1;;4003:2:26;3988:18;;3975:32;;-1:-1:-1;4106:2:26;4091:18;;4078:32;;-1:-1:-1;4155:38:26;4188:3;4173:19;;4155:38;:::i;:::-;4145:48;;4212:38;4245:3;4234:9;4230:19;4212:38;:::i;:::-;4202:48;;4303:3;4292:9;4288:19;4275:33;-1:-1:-1;;;;;4323:8:26;4320:32;4317:52;;;4365:1;4362;4355:12;4317:52;4388:63;4443:7;4432:8;4421:9;4417:24;4388:63;:::i;:::-;4378:73;;;3391:1066;;;;;;;;;;:::o;4462:346::-;4530:6;4538;4591:2;4579:9;4570:7;4566:23;4562:32;4559:52;;;4607:1;4604;4597:12;4559:52;-1:-1:-1;;4652:23:26;;;4772:2;4757:18;;;4744:32;;-1:-1:-1;4462:346:26:o;4813:289::-;4855:3;4893:5;4887:12;4920:6;4915:3;4908:19;4976:6;4969:4;4962:5;4958:16;4951:4;4946:3;4942:14;4936:47;5028:1;5021:4;5012:6;5007:3;5003:16;4999:27;4992:38;5091:4;5084:2;5080:7;5075:2;5067:6;5063:15;5059:29;5054:3;5050:39;5046:50;5039:57;;;4813:289;;;;:::o;5216:388::-;5421:2;5410:9;5403:21;5384:4;5441:45;5482:2;5471:9;5467:18;5459:6;5441:45;:::i;:::-;-1:-1:-1;;;;;5522:32:26;;;;5517:2;5502:18;;5495:60;-1:-1:-1;5586:2:26;5571:18;5564:34;5433:53;5216:388;-1:-1:-1;5216:388:26:o;5609:1112::-;5771:6;5779;5787;5795;5803;5811;5819;5872:3;5860:9;5851:7;5847:23;5843:33;5840:53;;;5889:1;5886;5879:12;5840:53;5929:9;5916:23;-1:-1:-1;;;;;5954:6:26;5951:30;5948:50;;;5994:1;5991;5984:12;5948:50;6017;6059:7;6050:6;6039:9;6035:22;6017:50;:::i;:::-;6007:60;-1:-1:-1;;6136:2:26;6121:18;;6108:32;;-1:-1:-1;6237:2:26;6222:18;;6209:32;;-1:-1:-1;6286:37:26;6319:2;6304:18;;6286:37;:::i;:::-;6276:47;;6342:38;6375:3;6364:9;6360:19;6342:38;:::i;:::-;6332:48;;6433:3;6422:9;6418:19;6405:33;-1:-1:-1;;;;;6453:8:26;6450:32;6447:52;;;6495:1;6492;6485:12;6447:52;6518:63;6573:7;6562:8;6551:9;6547:24;6518:63;:::i;:::-;6508:73;;;6633:3;6622:9;6618:19;6605:33;6669:1;6660:7;6657:14;6647:42;;6685:1;6682;6675:12;6647:42;6708:7;6698:17;;;5609:1112;;;;;;;;;;:::o;6726:300::-;6794:6;6802;6855:2;6843:9;6834:7;6830:23;6826:32;6823:52;;;6871:1;6868;6861:12;6823:52;6916:23;;;-1:-1:-1;6982:38:26;7016:2;7001:18;;6982:38;:::i;:::-;6972:48;;6726:300;;;;;:::o;7319:186::-;7378:6;7431:2;7419:9;7410:7;7406:23;7402:32;7399:52;;;7447:1;7444;7437:12;7399:52;7470:29;7489:9;7470:29;:::i;:::-;7460:39;7319:186;-1:-1:-1;;;7319:186:26:o;7510:420::-;7563:3;7601:5;7595:12;7628:6;7623:3;7616:19;7660:4;7655:3;7651:14;7644:21;;7699:4;7692:5;7688:16;7722:1;7732:173;7746:6;7743:1;7740:13;7732:173;;;7807:13;;7795:26;;7850:4;7841:14;;;;7878:17;;;;7768:1;7761:9;7732:173;;;-1:-1:-1;7921:3:26;;7510:420;-1:-1:-1;;;;7510:420:26:o;7935:261::-;8114:2;8103:9;8096:21;8077:4;8134:56;8186:2;8175:9;8171:18;8163:6;8134:56;:::i;8201:348::-;8285:6;8338:2;8326:9;8317:7;8313:23;8309:32;8306:52;;;8354:1;8351;8344:12;8306:52;8394:9;8381:23;-1:-1:-1;;;;;8419:6:26;8416:30;8413:50;;;8459:1;8456;8449:12;8413:50;8482:61;8535:7;8526:6;8515:9;8511:22;8482:61;:::i;:::-;8472:71;8201:348;-1:-1:-1;;;;8201:348:26:o;9015:1112::-;9215:4;9263:2;9252:9;9248:18;9293:2;9282:9;9275:21;9316:6;9351;9345:13;9382:6;9374;9367:22;9420:2;9409:9;9405:18;9398:25;;9482:2;9472:6;9469:1;9465:14;9454:9;9450:30;9446:39;9432:53;;9520:2;9512:6;9508:15;9541:1;9551:547;9565:6;9562:1;9559:13;9551:547;;;9658:2;9654:7;9642:9;9634:6;9630:22;9626:36;9621:3;9614:49;9692:6;9686:13;9738:2;9732:9;9769:4;9761:6;9754:20;9801:50;9845:4;9837:6;9833:17;9819:12;9801:50;:::i;:::-;9906:2;9898:11;;;9892:18;-1:-1:-1;;;;;9888:44:26;9871:15;;;9864:69;9984:2;9976:11;;;9970:18;9953:15;;;;9946:43;;;;-1:-1:-1;9787:64:26;10076:12;;;;10041:15;;;;;9929:1;9580:9;9551:547;;;-1:-1:-1;10115:6:26;;9015:1112;-1:-1:-1;;;;;;9015:1112:26:o;10132:436::-;10210:6;10218;10271:2;10259:9;10250:7;10246:23;10242:32;10239:52;;;10287:1;10284;10277:12;10239:52;10332:23;;;-1:-1:-1;10430:2:26;10415:18;;10402:32;-1:-1:-1;;;;;10446:30:26;;10443:50;;;10489:1;10486;10479:12;10443:50;10512;10554:7;10545:6;10534:9;10530:22;10512:50;:::i;:::-;10502:60;;;10132:436;;;;;:::o;10573:724::-;10668:6;10676;10684;10737:2;10725:9;10716:7;10712:23;10708:32;10705:52;;;10753:1;10750;10743:12;10705:52;10798:23;;;-1:-1:-1;10896:2:26;10881:18;;10868:32;-1:-1:-1;;;;;10912:30:26;;10909:50;;;10955:1;10952;10945:12;10909:50;10978:22;;11031:4;11023:13;;11019:27;-1:-1:-1;11009:55:26;;11060:1;11057;11050:12;11009:55;11100:2;11087:16;-1:-1:-1;;;;;11118:6:26;11115:30;11112:50;;;11158:1;11155;11148:12;11112:50;11211:7;11206:2;11196:6;11193:1;11189:14;11185:2;11181:23;11177:32;11174:45;11171:65;;;11232:1;11229;11222:12;11171:65;10573:724;;11263:2;11255:11;;;;;-1:-1:-1;11285:6:26;;-1:-1:-1;;;10573:724:26:o;11397:127::-;11458:10;11453:3;11449:20;11446:1;11439:31;11489:4;11486:1;11479:15;11513:4;11510:1;11503:15;11529:238;11611:1;11604:5;11601:12;11591:143;;11656:10;11651:3;11647:20;11644:1;11637:31;11691:4;11688:1;11681:15;11719:4;11716:1;11709:15;11591:143;11743:18;;11529:238::o;11772:887::-;12131:25;;;12199:14;;12192:22;12187:2;12172:18;;12165:50;-1:-1:-1;;;;;12251:32:26;;12246:2;12231:18;;12224:60;12320:3;12315:2;12300:18;;12293:31;;;-1:-1:-1;;12341:46:26;;12367:19;;12359:6;12341:46;:::i;:::-;12333:54;;12424:6;12418:3;12407:9;12403:19;12396:35;12468:6;12462:3;12451:9;12447:19;12440:35;12524:6;12516;12512:19;12506:3;12495:9;12491:19;12484:48;12581:6;12573;12569:19;12563:3;12552:9;12548:19;12541:48;12598:55;12648:3;12637:9;12633:19;12625:6;12598:55;:::i;:::-;11772:887;;;;;;;;;;;;:::o;12664:446::-;12717:3;12755:5;12749:12;12782:6;12777:3;12770:19;12814:4;12809:3;12805:14;12798:21;;12853:4;12846:5;12842:16;12876:1;12886:199;12900:6;12897:1;12894:13;12886:199;;;12965:13;;-1:-1:-1;;;;;12961:39:26;12949:52;;13030:4;13021:14;;;;13058:17;;;;12997:1;12915:9;12886:199;;13115:1551;13294:2;13283:9;13276:21;13339:6;13333:13;13328:2;13317:9;13313:18;13306:41;13257:4;13394:2;13386:6;13382:15;13376:22;13407:49;13452:2;13441:9;13437:18;13423:12;7101:13;7094:21;7082:34;;7031:91;13407:49;-1:-1:-1;13505:2:26;13493:15;;13487:22;-1:-1:-1;;;;;5173:31:26;;13568:2;13553:18;;5161:44;13518:54;13621:2;13613:6;13609:15;13603:22;13662:6;13656:3;13645:9;13641:19;13634:35;13692:54;13741:3;13730:9;13726:19;13710:14;13692:54;:::i;:::-;13678:68;;13801:3;13793:6;13789:16;13783:23;13777:3;13766:9;13762:19;13755:52;13862:3;13854:6;13850:16;13844:23;13838:3;13827:9;13823:19;13816:52;13917:3;13909:6;13905:16;13899:23;13931:54;13980:3;13969:9;13965:19;13949:14;11378:6;11367:18;11355:31;;11302:90;13931:54;-1:-1:-1;14034:3:26;14022:16;;14016:23;11378:6;11367:18;;14097:3;14082:19;;11355:31;-1:-1:-1;14151:3:26;14139:16;;14133:23;14197:22;;;-1:-1:-1;;14193:36:26;14187:3;14172:19;;14165:65;14253:52;14201:6;14133:23;14253:52;:::i;:::-;14239:66;;;14354:3;14346:6;14342:16;14336:23;14428:2;14424:7;14412:9;14404:6;14400:22;14396:36;14390:3;14379:9;14375:19;14368:65;14456:52;14501:6;14485:14;14456:52;:::i;:::-;14442:66;;;14557:3;14549:6;14545:16;14539:23;14571:66;14629:6;14618:9;14614:22;14598:14;14571:66;:::i;:::-;-1:-1:-1;14654:6:26;13115:1551;-1:-1:-1;;;13115:1551:26:o;14671:355::-;14873:2;14855:21;;;14912:2;14892:18;;;14885:30;14951:33;14946:2;14931:18;;14924:61;15017:2;15002:18;;14671:355::o;15241:352::-;15443:2;15425:21;;;15482:2;15462:18;;;15455:30;15521;15516:2;15501:18;;15494:58;15584:2;15569:18;;15241:352::o;15598:127::-;15659:10;15654:3;15650:20;15647:1;15640:31;15690:4;15687:1;15680:15;15714:4;15711:1;15704:15;15730:128;15797:9;;;15818:11;;;15815:37;;;15832:18;;:::i;15863:353::-;16065:2;16047:21;;;16104:2;16084:18;;;16077:30;16143:31;16138:2;16123:18;;16116:59;16207:2;16192:18;;15863:353::o;16582:398::-;16784:2;16766:21;;;16823:2;16803:18;;;16796:30;16862:34;16857:2;16842:18;;16835:62;-1:-1:-1;;;16928:2:26;16913:18;;16906:32;16970:3;16955:19;;16582:398::o;16985:127::-;17046:10;17041:3;17037:20;17034:1;17027:31;17077:4;17074:1;17067:15;17101:4;17098:1;17091:15;17519:380;17598:1;17594:12;;;;17641;;;17662:61;;17716:4;17708:6;17704:17;17694:27;;17662:61;17769:2;17761:6;17758:14;17738:18;17735:38;17732:161;;17815:10;17810:3;17806:20;17803:1;17796:31;17850:4;17847:1;17840:15;17878:4;17875:1;17868:15;17732:161;;17519:380;;;:::o;18030:518::-;18132:2;18127:3;18124:11;18121:421;;;18168:5;18165:1;18158:16;18212:4;18209:1;18199:18;18282:2;18270:10;18266:19;18263:1;18259:27;18253:4;18249:38;18318:4;18306:10;18303:20;18300:47;;;-1:-1:-1;18341:4:26;18300:47;18396:2;18391:3;18387:12;18384:1;18380:20;18374:4;18370:31;18360:41;;18451:81;18469:2;18462:5;18459:13;18451:81;;;18528:1;18514:16;;18495:1;18484:13;18451:81;;18121:421;18030:518;;;:::o;18724:1299::-;18850:3;18844:10;-1:-1:-1;;;;;18869:6:26;18866:30;18863:56;;;18899:18;;:::i;:::-;18928:97;19018:6;18978:38;19010:4;19004:11;18978:38;:::i;:::-;18972:4;18928:97;:::i;:::-;19074:4;19105:2;19094:14;;19122:1;19117:649;;;;19810:1;19827:6;19824:89;;;-1:-1:-1;19879:19:26;;;19873:26;19824:89;-1:-1:-1;;18681:1:26;18677:11;;;18673:24;18669:29;18659:40;18705:1;18701:11;;;18656:57;19926:81;;19087:930;;19117:649;17977:1;17970:14;;;18014:4;18001:18;;-1:-1:-1;;19153:20:26;;;19271:222;19285:7;19282:1;19279:14;19271:222;;;19367:19;;;19361:26;19346:42;;19474:4;19459:20;;;;19427:1;19415:14;;;;19301:12;19271:222;;;19275:3;19521:6;19512:7;19509:19;19506:201;;;19582:19;;;19576:26;-1:-1:-1;;19665:1:26;19661:14;;;19677:3;19657:24;19653:37;19649:42;19634:58;19619:74;;19506:201;-1:-1:-1;;;;19753:1:26;19737:14;;;19733:22;19720:36;;-1:-1:-1;18724:1299:26:o;20028:348::-;20230:2;20212:21;;;20269:2;20249:18;;;20242:30;20308:26;20303:2;20288:18;;20281:54;20367:2;20352:18;;20028:348::o;20742:840::-;21119:3;21108:9;21101:22;21082:4;21146:46;21187:3;21176:9;21172:19;21164:6;21146:46;:::i;:::-;21228:6;21223:2;21212:9;21208:18;21201:34;21271:6;21266:2;21255:9;21251:18;21244:34;21326:6;21318;21314:19;21309:2;21298:9;21294:18;21287:47;21383:6;21375;21371:19;21365:3;21354:9;21350:19;21343:48;21440:9;21432:6;21428:22;21422:3;21411:9;21407:19;21400:51;21468:44;21505:6;21497;21468:44;:::i;:::-;21460:52;;;21521:55;21571:3;21560:9;21556:19;21548:6;21521:55;:::i;:::-;20742:840;;;;;;;;;;:::o;23465:135::-;23504:3;23525:17;;;23522:43;;23545:18;;:::i;:::-;-1:-1:-1;23592:1:26;23581:13;;23465:135::o;23605:125::-;23670:9;;;23691:10;;;23688:36;;;23704:18;;:::i;24903:401::-;25105:2;25087:21;;;25144:2;25124:18;;;25117:30;25183:34;25178:2;25163:18;;25156:62;-1:-1:-1;;;25249:2:26;25234:18;;25227:35;25294:3;25279:19;;24903:401::o;25309:400::-;25511:2;25493:21;;;25550:2;25530:18;;;25523:30;25589:34;25584:2;25569:18;;25562:62;-1:-1:-1;;;25655:2:26;25640:18;;25633:34;25699:3;25684:19;;25309:400::o;26531:615::-;26731:2;26743:21;;;26716:18;;26799:22;;;26683:4;26878:6;26852:2;26837:18;;26683:4;26912:208;26926:6;26923:1;26920:13;26912:208;;;-1:-1:-1;;;;;26991:26:26;27010:6;26991:26;:::i;:::-;26987:52;26975:65;;27069:2;27095:15;;;;27060:12;;;;26948:1;26941:9;26912:208;;;-1:-1:-1;27137:3:26;26531:615;-1:-1:-1;;;;;26531:615:26:o;27560:168::-;27633:9;;;27664;;27681:15;;;27675:22;;27661:37;27651:71;;27702:18;;:::i;27733:217::-;27773:1;27799;27789:132;;27843:10;27838:3;27834:20;27831:1;27824:31;27878:4;27875:1;27868:15;27906:4;27903:1;27896:15;27789:132;-1:-1:-1;27935:9:26;;27733:217::o",
+        "linkReferences": {}
+    },
+    "methodIdentifiers": {
+        "PLATFORM_FEE_PERCENTAGE()": "15548232",
+        "bounties(uint256)": "dc2f8744",
+        "bountyIdCounter()": "666980b5",
+        "bountySubmissions(uint256,uint256)": "429e2398",
+        "calculatePrizesAndFee(uint256[])": "7dda8f80",
+        "cancelBounty(uint256)": "e5e5dff1",
+        "createBounty(string,uint256,uint256,uint16,uint16,uint256[],uint8)": "439460c5",
+        "createSubmission(uint256,string)": "a5e99c4e",
+        "editBounty(uint256,string,uint256,uint256,uint16,uint16,uint256[])": "342ec937",
+        "editSubmision(uint256,string,uint256)": "2f8feaf2",
+        "feeCollected()": "6ca7f95c",
+        "getBounty(uint256)": "ee8c4bbf",
+        "getBountySubmissions(uint256)": "92af0962",
+        "getUserBounties(address)": "6591a185",
+        "isParticipant(uint256,address)": "758d9b89",
+        "isParticipantOfBounty(uint256,address)": "5af38890",
+        "owner()": "8da5cb5b",
+        "renounceOwnership()": "715018a6",
+        "selectWinners(uint256,address[])": "ccf7c20a",
+        "transferOwnership(address)": "f2fde38b",
+        "userBounties(address,uint256)": "2b9234b9",
+        "withdraw(uint256)": "2e1a7d4d"
+    },
+    "rawMetadata": "{\"compiler\":{\"version\":\"0.8.28+commit.7893614a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountUser\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountRequired\",\"type\":\"uint256\"}],\"name\":\"BountyBoard__InsufficientFunds\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ReentrancyGuardReentrantCall\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"BountyCancelled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"resultDeadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"minParticipants\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"totalWinners\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"prizes\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"enum BountyType\",\"name\":\"bountyType\",\"type\":\"uint8\"}],\"name\":\"BountyCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"resultDeadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"minParticipants\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"totalWinners\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"prizes\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"enum BountyType\",\"name\":\"bountyType\",\"type\":\"uint8\"}],\"name\":\"BountyUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"participant\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"SubmissionCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"participant\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"SubmissionUdpated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"winners\",\"type\":\"address[]\"}],\"name\":\"WinnersSelected\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[],\"name\":\"PLATFORM_FEE_PERCENTAGE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"bounties\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"resultDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"minParticipants\",\"type\":\"uint16\"},{\"internalType\":\"uint16\",\"name\":\"totalWinners\",\"type\":\"uint16\"},{\"internalType\":\"enum BountyType\",\"name\":\"bountyType\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"bountyIdCounter\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"bountySubmissions\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"participant\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_prizes\",\"type\":\"uint256[]\"}],\"name\":\"calculatePrizesAndFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalPrizeAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"platformFee\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_bountyId\",\"type\":\"uint256\"}],\"name\":\"cancelBounty\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_resultDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"_minParticipants\",\"type\":\"uint16\"},{\"internalType\":\"uint16\",\"name\":\"_totalWinners\",\"type\":\"uint16\"},{\"internalType\":\"uint256[]\",\"name\":\"_prizes\",\"type\":\"uint256[]\"},{\"internalType\":\"enum BountyType\",\"name\":\"_bountyType\",\"type\":\"uint8\"}],\"name\":\"createBounty\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_bountyId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_cid\",\"type\":\"string\"}],\"name\":\"createSubmission\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_bountyId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_resultDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"_minParticipants\",\"type\":\"uint16\"},{\"internalType\":\"uint16\",\"name\":\"_totalWinners\",\"type\":\"uint16\"},{\"internalType\":\"uint256[]\",\"name\":\"_prizes\",\"type\":\"uint256[]\"}],\"name\":\"editBounty\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_bountyId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_submissionIndex\",\"type\":\"uint256\"}],\"name\":\"editSubmision\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeCollected\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_bountyId\",\"type\":\"uint256\"}],\"name\":\"getBounty\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"resultDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"minParticipants\",\"type\":\"uint16\"},{\"internalType\":\"uint16\",\"name\":\"totalWinners\",\"type\":\"uint16\"},{\"internalType\":\"uint256[]\",\"name\":\"prizes\",\"type\":\"uint256[]\"},{\"internalType\":\"address[]\",\"name\":\"selectedWinners\",\"type\":\"address[]\"},{\"internalType\":\"enum BountyType\",\"name\":\"bountyType\",\"type\":\"uint8\"}],\"internalType\":\"struct Bounty\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_bountyId\",\"type\":\"uint256\"}],\"name\":\"getBountySubmissions\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"cid\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"participant\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"internalType\":\"struct Submission[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_creator\",\"type\":\"address\"}],\"name\":\"getUserBounties\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"isParticipant\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_bountyId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_participant\",\"type\":\"address\"}],\"name\":\"isParticipantOfBounty\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_bountyId\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"_winners\",\"type\":\"address[]\"}],\"name\":\"selectWinners\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"userBounties\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"errors\":{\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}],\"ReentrancyGuardReentrantCall()\":[{\"details\":\"Unauthorized reentrant call.\"}]},\"kind\":\"dev\",\"methods\":{\"calculatePrizesAndFee(uint256[])\":{\"details\":\"Calculates the total prize amount and platform fee\",\"params\":{\"_prizes\":\"Array of individual prize amounts\"},\"returns\":{\"platformFee\":\"The fee collected by the platform\",\"totalPrizeAmount\":\"The sum of all prizes\"}},\"cancelBounty(uint256)\":{\"details\":\"Allows the creator to cancel a bounty\",\"params\":{\"_bountyId\":\"The ID of the bounty\"}},\"createBounty(string,uint256,uint256,uint16,uint16,uint256[],uint8)\":{\"details\":\"Creates a new bounty\",\"params\":{\"_bountyType\":\"Type of the bounty (editable or non-editable)\",\"_cid\":\"The CID of the bounty\",\"_deadline\":\"The deadline for submissions\",\"_minParticipants\":\"Minimum number of participants required\",\"_prizes\":\"Array of individual prize amounts for each winner\",\"_resultDeadline\":\"The deadline for announcing results\",\"_totalWinners\":\"Total number of winners to be selected\"}},\"createSubmission(uint256,string)\":{\"details\":\"Allows a participant to submit their work for a bounty\",\"params\":{\"_bountyId\":\"The ID of the bounty\",\"_cid\":\"The CID of the submission\"}},\"editBounty(uint256,string,uint256,uint256,uint16,uint16,uint256[])\":{\"details\":\"Edits an existing bounty\",\"params\":{\"_bountyId\":\"The ID of the bounty to edit\",\"_cid\":\"The new CID of the bounty\",\"_deadline\":\"The new deadline for submissions\",\"_minParticipants\":\"Minimum number of participants required\",\"_prizes\":\"Array of individual prize amounts for each winner\",\"_resultDeadline\":\"The new deadline for announcing results\",\"_totalWinners\":\"Total number of winners to be selected\"}},\"editSubmision(uint256,string,uint256)\":{\"details\":\"Allows a participant to edit their submission\",\"params\":{\"_bountyId\":\"The ID of the bounty\",\"_cid\":\"The new CID of the submission\",\"_submissionIndex\":\"The index of the submission in the array\"}},\"getBounty(uint256)\":{\"details\":\"Returns the list of bounties created by a user\",\"params\":{\"_bountyId\":\"bountyId\"},\"returns\":{\"_0\":\"The bounty object\"}},\"getBountySubmissions(uint256)\":{\"details\":\"Returns the list of submissions for a bounty\",\"params\":{\"_bountyId\":\"The ID of the bounty\"},\"returns\":{\"_0\":\"The list of submissions for the bounty\"}},\"getUserBounties(address)\":{\"details\":\"Returns the list of bounties created by a user\",\"params\":{\"_creator\":\"The address of the creator\"},\"returns\":{\"_0\":\"The list of bounty IDs created by the user\"}},\"isParticipantOfBounty(uint256,address)\":{\"details\":\"Returns the list of submissions for a bounty\",\"params\":{\"_bountyId\":\"The ID of the bounty\",\"_participant\":\"The address of the participant\"},\"returns\":{\"_0\":\"True if the address is a participant, false otherwise\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"selectWinners(uint256,address[])\":{\"details\":\"Allows the creator to select winners for the bounty and distribute prizes\",\"params\":{\"_bountyId\":\"The ID of the bounty\",\"_winners\":\"Array of addresses of the selected winners\"}},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"withdraw(uint256)\":{\"details\":\"Allows the owner to withdraw collected fees\",\"params\":{\"_amount\":\"The amount to withdraw\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/BountyBoard.sol\":\"BountyBoard\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\"]},\"sources\":{\"lib/openzeppelin-contracts/contracts/access/Ownable.sol\":{\"keccak256\":\"0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6\",\"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a\"]},\"lib/openzeppelin-contracts/contracts/utils/Context.sol\":{\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12\",\"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF\"]},\"lib/openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol\":{\"keccak256\":\"0x11a5a79827df29e915a12740caf62fe21ebe27c08c9ae3e09abe9ee3ba3866d3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3cf0c69ab827e3251db9ee6a50647d62c90ba580a4d7bbff21f2bea39e7b2f4a\",\"dweb:/ipfs/QmZiKwtKU1SBX4RGfQtY7PZfiapbbu6SZ9vizGQD9UHjRA\"]},\"src/BountyBoard.sol\":{\"keccak256\":\"0xf68d15bf2d04e813c1f442f46e76d33d1de8cb85695065e8deb140e47567eaa7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2d046819e38718328817081b20b1bbe161fb94de750f6bcd33b583f72aa1d2cb\",\"dweb:/ipfs/QmNc3m1DQ9uVRX5LeDqngWD6pgPnAfDMz9SJD1WhLjyMRG\"]},\"src/IBountyBoard.sol\":{\"keccak256\":\"0x4e4d4960fb8854be03b3b3ca0e54b11b81498ba1b7d7769f92eb90745d4ec080\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://21021a2fcf5b4899e3570d7d1ef3ea23484c50395b6d7323e572b1f4ba3b29f1\",\"dweb:/ipfs/QmZqSgFpn63spD2Fwm8xF2B5QZgjf9r6umBa1XarhuGUq4\"]},\"src/Types.sol\":{\"keccak256\":\"0xee213f03f6633d6454791ef348b7a2ab7d575235f368920293e0e7c3a00008b6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a7b566129641fb080590ed0e50fd8a9b4dc147a466949f5ec28b0ada20951975\",\"dweb:/ipfs/QmaQsZ2RDfDzNB2oqpcTzcvEXrgYcJoZPBrX1mLQxm8Sj4\"]}},\"version\":1}",
+    "metadata": {
+        "compiler": {
+            "version": "0.8.28+commit.7893614a"
+        },
+        "language": "Solidity",
+        "output": {
+            "abi": [
+                {
+                    "inputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "constructor"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "amountUser",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amountRequired",
+                            "type": "uint256"
+                        }
+                    ],
+                    "type": "error",
+                    "name": "BountyBoard__InsufficientFunds"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "owner",
+                            "type": "address"
+                        }
+                    ],
+                    "type": "error",
+                    "name": "OwnableInvalidOwner"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "account",
+                            "type": "address"
+                        }
+                    ],
+                    "type": "error",
+                    "name": "OwnableUnauthorizedAccount"
+                },
+                {
+                    "inputs": [],
+                    "type": "error",
+                    "name": "ReentrancyGuardReentrantCall"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "id",
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ],
+                    "type": "event",
+                    "name": "BountyCancelled",
+                    "anonymous": false
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "id",
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "creator",
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "cid",
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "deadline",
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "resultDeadline",
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "minParticipants",
+                            "type": "uint16",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "totalWinners",
+                            "type": "uint16",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint256[]",
+                            "name": "prizes",
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "enum BountyType",
+                            "name": "bountyType",
+                            "type": "uint8",
+                            "indexed": false
+                        }
+                    ],
+                    "type": "event",
+                    "name": "BountyCreated",
+                    "anonymous": false
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "id",
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "creator",
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "cid",
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "deadline",
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "resultDeadline",
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "minParticipants",
+                            "type": "uint16",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "totalWinners",
+                            "type": "uint16",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint256[]",
+                            "name": "prizes",
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "enum BountyType",
+                            "name": "bountyType",
+                            "type": "uint8",
+                            "indexed": false
+                        }
+                    ],
+                    "type": "event",
+                    "name": "BountyUpdated",
+                    "anonymous": false
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "previousOwner",
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "newOwner",
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ],
+                    "type": "event",
+                    "name": "OwnershipTransferred",
+                    "anonymous": false
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "bountyId",
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "cid",
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "participant",
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "timestamp",
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ],
+                    "type": "event",
+                    "name": "SubmissionCreated",
+                    "anonymous": false
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "bountyId",
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "cid",
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "participant",
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "timestamp",
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ],
+                    "type": "event",
+                    "name": "SubmissionUdpated",
+                    "anonymous": false
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "bountyId",
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "internalType": "address[]",
+                            "name": "winners",
+                            "type": "address[]",
+                            "indexed": false
+                        }
+                    ],
+                    "type": "event",
+                    "name": "WinnersSelected",
+                    "anonymous": false
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "payable",
+                    "type": "fallback"
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "PLATFORM_FEE_PERCENTAGE",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "bounties",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "id",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "isActive",
+                            "type": "bool"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "creator",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "cid",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "deadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "resultDeadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "minParticipants",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "totalWinners",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "enum BountyType",
+                            "name": "bountyType",
+                            "type": "uint8"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "bountyIdCounter",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "bountySubmissions",
+                    "outputs": [
+                        {
+                            "internalType": "string",
+                            "name": "cid",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "participant",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "timestamp",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256[]",
+                            "name": "_prizes",
+                            "type": "uint256[]"
+                        }
+                    ],
+                    "stateMutability": "pure",
+                    "type": "function",
+                    "name": "calculatePrizesAndFee",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "totalPrizeAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "platformFee",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_bountyId",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "cancelBounty"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "string",
+                            "name": "_cid",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_deadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_resultDeadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "_minParticipants",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "_totalWinners",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint256[]",
+                            "name": "_prizes",
+                            "type": "uint256[]"
+                        },
+                        {
+                            "internalType": "enum BountyType",
+                            "name": "_bountyType",
+                            "type": "uint8"
+                        }
+                    ],
+                    "stateMutability": "payable",
+                    "type": "function",
+                    "name": "createBounty",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_bountyId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_cid",
+                            "type": "string"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "createSubmission"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_bountyId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_cid",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_deadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_resultDeadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "_minParticipants",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "_totalWinners",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint256[]",
+                            "name": "_prizes",
+                            "type": "uint256[]"
+                        }
+                    ],
+                    "stateMutability": "payable",
+                    "type": "function",
+                    "name": "editBounty"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_bountyId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_cid",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_submissionIndex",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "editSubmision"
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "feeCollected",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_bountyId",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "getBounty",
+                    "outputs": [
+                        {
+                            "internalType": "struct Bounty",
+                            "name": "",
+                            "type": "tuple",
+                            "components": [
+                                {
+                                    "internalType": "uint256",
+                                    "name": "id",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "bool",
+                                    "name": "isActive",
+                                    "type": "bool"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "creator",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "string",
+                                    "name": "cid",
+                                    "type": "string"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "deadline",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "resultDeadline",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint16",
+                                    "name": "minParticipants",
+                                    "type": "uint16"
+                                },
+                                {
+                                    "internalType": "uint16",
+                                    "name": "totalWinners",
+                                    "type": "uint16"
+                                },
+                                {
+                                    "internalType": "uint256[]",
+                                    "name": "prizes",
+                                    "type": "uint256[]"
+                                },
+                                {
+                                    "internalType": "address[]",
+                                    "name": "selectedWinners",
+                                    "type": "address[]"
+                                },
+                                {
+                                    "internalType": "enum BountyType",
+                                    "name": "bountyType",
+                                    "type": "uint8"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_bountyId",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "getBountySubmissions",
+                    "outputs": [
+                        {
+                            "internalType": "struct Submission[]",
+                            "name": "",
+                            "type": "tuple[]",
+                            "components": [
+                                {
+                                    "internalType": "string",
+                                    "name": "cid",
+                                    "type": "string"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "participant",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "timestamp",
+                                    "type": "uint256"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "_creator",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "getUserBounties",
+                    "outputs": [
+                        {
+                            "internalType": "uint256[]",
+                            "name": "",
+                            "type": "uint256[]"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "isParticipant",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_bountyId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "_participant",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "isParticipantOfBounty",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "owner",
+                    "outputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "renounceOwnership"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_bountyId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address[]",
+                            "name": "_winners",
+                            "type": "address[]"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "selectWinners"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "newOwner",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "transferOwnership"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function",
+                    "name": "userBounties",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ]
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_amount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function",
+                    "name": "withdraw"
+                },
+                {
+                    "inputs": [],
+                    "stateMutability": "payable",
+                    "type": "receive"
+                }
+            ],
+            "devdoc": {
+                "kind": "dev",
+                "methods": {
+                    "calculatePrizesAndFee(uint256[])": {
+                        "details": "Calculates the total prize amount and platform fee",
+                        "params": {
+                            "_prizes": "Array of individual prize amounts"
+                        },
+                        "returns": {
+                            "platformFee": "The fee collected by the platform",
+                            "totalPrizeAmount": "The sum of all prizes"
+                        }
+                    },
+                    "cancelBounty(uint256)": {
+                        "details": "Allows the creator to cancel a bounty",
+                        "params": {
+                            "_bountyId": "The ID of the bounty"
+                        }
+                    },
+                    "createBounty(string,uint256,uint256,uint16,uint16,uint256[],uint8)": {
+                        "details": "Creates a new bounty",
+                        "params": {
+                            "_bountyType": "Type of the bounty (editable or non-editable)",
+                            "_cid": "The CID of the bounty",
+                            "_deadline": "The deadline for submissions",
+                            "_minParticipants": "Minimum number of participants required",
+                            "_prizes": "Array of individual prize amounts for each winner",
+                            "_resultDeadline": "The deadline for announcing results",
+                            "_totalWinners": "Total number of winners to be selected"
+                        }
+                    },
+                    "createSubmission(uint256,string)": {
+                        "details": "Allows a participant to submit their work for a bounty",
+                        "params": {
+                            "_bountyId": "The ID of the bounty",
+                            "_cid": "The CID of the submission"
+                        }
+                    },
+                    "editBounty(uint256,string,uint256,uint256,uint16,uint16,uint256[])": {
+                        "details": "Edits an existing bounty",
+                        "params": {
+                            "_bountyId": "The ID of the bounty to edit",
+                            "_cid": "The new CID of the bounty",
+                            "_deadline": "The new deadline for submissions",
+                            "_minParticipants": "Minimum number of participants required",
+                            "_prizes": "Array of individual prize amounts for each winner",
+                            "_resultDeadline": "The new deadline for announcing results",
+                            "_totalWinners": "Total number of winners to be selected"
+                        }
+                    },
+                    "editSubmision(uint256,string,uint256)": {
+                        "details": "Allows a participant to edit their submission",
+                        "params": {
+                            "_bountyId": "The ID of the bounty",
+                            "_cid": "The new CID of the submission",
+                            "_submissionIndex": "The index of the submission in the array"
+                        }
+                    },
+                    "getBounty(uint256)": {
+                        "details": "Returns the list of bounties created by a user",
+                        "params": {
+                            "_bountyId": "bountyId"
+                        },
+                        "returns": {
+                            "_0": "The bounty object"
+                        }
+                    },
+                    "getBountySubmissions(uint256)": {
+                        "details": "Returns the list of submissions for a bounty",
+                        "params": {
+                            "_bountyId": "The ID of the bounty"
+                        },
+                        "returns": {
+                            "_0": "The list of submissions for the bounty"
+                        }
+                    },
+                    "getUserBounties(address)": {
+                        "details": "Returns the list of bounties created by a user",
+                        "params": {
+                            "_creator": "The address of the creator"
+                        },
+                        "returns": {
+                            "_0": "The list of bounty IDs created by the user"
+                        }
+                    },
+                    "isParticipantOfBounty(uint256,address)": {
+                        "details": "Returns the list of submissions for a bounty",
+                        "params": {
+                            "_bountyId": "The ID of the bounty",
+                            "_participant": "The address of the participant"
+                        },
+                        "returns": {
+                            "_0": "True if the address is a participant, false otherwise"
+                        }
+                    },
+                    "owner()": {
+                        "details": "Returns the address of the current owner."
+                    },
+                    "renounceOwnership()": {
+                        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+                    },
+                    "selectWinners(uint256,address[])": {
+                        "details": "Allows the creator to select winners for the bounty and distribute prizes",
+                        "params": {
+                            "_bountyId": "The ID of the bounty",
+                            "_winners": "Array of addresses of the selected winners"
+                        }
+                    },
+                    "transferOwnership(address)": {
+                        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+                    },
+                    "withdraw(uint256)": {
+                        "details": "Allows the owner to withdraw collected fees",
+                        "params": {
+                            "_amount": "The amount to withdraw"
+                        }
+                    }
+                },
+                "version": 1
+            },
+            "userdoc": {
+                "kind": "user",
+                "methods": {},
+                "version": 1
+            }
+        },
+        "settings": {
+            "remappings": [
+                "@openzeppelin/=lib/openzeppelin-contracts/",
+                "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+                "forge-std/=lib/forge-std/src/",
+                "halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/",
+                "openzeppelin-contracts/=lib/openzeppelin-contracts/"
+            ],
+            "optimizer": {
+                "enabled": true,
+                "runs": 200
+            },
+            "metadata": {
+                "bytecodeHash": "ipfs"
+            },
+            "compilationTarget": {
+                "src/BountyBoard.sol": "BountyBoard"
+            },
+            "evmVersion": "cancun",
+            "libraries": {}
+        },
+        "sources": {
+            "lib/openzeppelin-contracts/contracts/access/Ownable.sol": {
+                "keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+                "urls": [
+                    "bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+                    "dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+                ],
+                "license": "MIT"
+            },
+            "lib/openzeppelin-contracts/contracts/utils/Context.sol": {
+                "keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+                "urls": [
+                    "bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+                    "dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+                ],
+                "license": "MIT"
+            },
+            "lib/openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol": {
+                "keccak256": "0x11a5a79827df29e915a12740caf62fe21ebe27c08c9ae3e09abe9ee3ba3866d3",
+                "urls": [
+                    "bzz-raw://3cf0c69ab827e3251db9ee6a50647d62c90ba580a4d7bbff21f2bea39e7b2f4a",
+                    "dweb:/ipfs/QmZiKwtKU1SBX4RGfQtY7PZfiapbbu6SZ9vizGQD9UHjRA"
+                ],
+                "license": "MIT"
+            },
+            "src/BountyBoard.sol": {
+                "keccak256": "0xf68d15bf2d04e813c1f442f46e76d33d1de8cb85695065e8deb140e47567eaa7",
+                "urls": [
+                    "bzz-raw://2d046819e38718328817081b20b1bbe161fb94de750f6bcd33b583f72aa1d2cb",
+                    "dweb:/ipfs/QmNc3m1DQ9uVRX5LeDqngWD6pgPnAfDMz9SJD1WhLjyMRG"
+                ],
+                "license": "MIT"
+            },
+            "src/IBountyBoard.sol": {
+                "keccak256": "0x4e4d4960fb8854be03b3b3ca0e54b11b81498ba1b7d7769f92eb90745d4ec080",
+                "urls": [
+                    "bzz-raw://21021a2fcf5b4899e3570d7d1ef3ea23484c50395b6d7323e572b1f4ba3b29f1",
+                    "dweb:/ipfs/QmZqSgFpn63spD2Fwm8xF2B5QZgjf9r6umBa1XarhuGUq4"
+                ],
+                "license": "MIT"
+            },
+            "src/Types.sol": {
+                "keccak256": "0xee213f03f6633d6454791ef348b7a2ab7d575235f368920293e0e7c3a00008b6",
+                "urls": [
+                    "bzz-raw://a7b566129641fb080590ed0e50fd8a9b4dc147a466949f5ec28b0ada20951975",
+                    "dweb:/ipfs/QmaQsZ2RDfDzNB2oqpcTzcvEXrgYcJoZPBrX1mLQxm8Sj4"
+                ],
+                "license": "MIT"
+            }
+        },
+        "version": 1
+    },
+    "id": 22
+}

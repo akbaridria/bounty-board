@@ -1,13 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback } from "react";
-import { BrowserProvider, Contract, ethers, JsonRpcSigner } from "ethers";
-import lsp7Json from "../json/lsp7/lsp7.json";
+import {
+  BrowserProvider,
+  Contract,
+  ethers,
+  formatEther,
+  JsonRpcSigner,
+} from "ethers";
+import bountyBoardJson from "../json/bounty-board.json";
 import { useUpProvider } from "../context/UpProvider";
-import { lukso } from "viem/chains";
+import { config } from "@/config";
 
 export const useSmartContract = () => {
-  const { client, accounts, chainId } = useUpProvider();
-
+  const { client, accounts } = useUpProvider();
+  const contractAddress: `0x${string}` = config.CONTRACT_ADDRESS;
   {
     /**
        In order to send a transaction using `up-provider`, we need to target a specific function of the smart contract,
@@ -50,38 +55,10 @@ export const useSmartContract = () => {
       contractAddress: string,
       signer: ethers.Signer
     ): Promise<Contract> => {
-      return new ethers.Contract(contractAddress, lsp7Json.abi, signer);
+      return new ethers.Contract(contractAddress, bountyBoardJson.abi, signer);
     },
     []
   );
-
-  const executeFunctionWithUProvider = useCallback(async () => {
-    try {
-      if (!client) {
-        return;
-      }
-      const contractAddressMainnet: `0x${string}` =
-        "0xA8Cb54517380B2df303BD00e8a512d478651ac4C";
-      const contractAddressTestnet: `0x${string}` =
-        "0x4E1Fe6B4085D79F5F500B835f3a2a56F27994338";
-
-      const contractAddress: `0x${string}` =
-        chainId === lukso.id ? contractAddressMainnet : contractAddressTestnet; // Example of a custom smart contract LSP7 address already deployed
-
-      const contract = await getContractInstance(contractAddress, client);
-      const data: string = contract.interface.encodeFunctionData("allCanMint"); // this is a custom function
-
-      const txResponse = await client.sendTransaction({
-        account: accounts[0] as `0x${string}`,
-        to: contractAddress as `0x${string}`,
-        data: data,
-      });
-      return txResponse;
-    } catch (error) {
-      console.error("Transaction failed:", error);
-      return;
-    }
-  }, [client, chainId, getContractInstance, accounts]);
 
   const getProvider = async (): Promise<BrowserProvider> => {
     if (!window.lukso) {
@@ -89,6 +66,99 @@ export const useSmartContract = () => {
     }
     return new ethers.BrowserProvider(window.lukso);
   };
+
+  const getSigner = useCallback(async (): Promise<JsonRpcSigner> => {
+    const browserProvider = await getProvider();
+    return browserProvider.getSigner();
+  }, []);
+
+  const getEthBalance = useCallback(
+    async (address: string) => {
+      const defaultReturn = {
+        formatted: "0",
+        bigNumber: BigInt(0),
+        wei: "0",
+      };
+      try {
+        if (!client) {
+          return defaultReturn;
+        }
+
+        const balanceHex = await client.request({
+          method: "eth_getBalance",
+          params: [address, "latest"],
+        });
+
+        const balanceBN = BigInt(balanceHex);
+
+        return {
+          formatted: formatEther(balanceBN),
+          bigNumber: balanceBN,
+          wei: balanceBN.toString(),
+        };
+      } catch (error) {
+        console.error("Failed to fetch balance:", error);
+        return defaultReturn;
+      }
+    },
+    [client]
+  );
+
+  const getUserBounties = useCallback(
+    async (creatorAddress: string) => {
+      try {
+        if (!client || !accounts?.[0]) {
+          return;
+        }
+
+        const contract = await getContractInstance(contractAddress, client);
+        const data = contract.interface.encodeFunctionData("getUserBounties", [
+          creatorAddress,
+        ]);
+
+        const result = await client.request({
+          method: "eth_call",
+          params: [
+            {
+              to: contractAddress,
+              data: data,
+            },
+            "latest",
+          ],
+        });
+
+        // Decode the result
+        return contract.interface.decodeFunctionResult(
+          "getUserBounties",
+          result
+        )[0];
+      } catch (error) {
+        console.error("Failed to fetch user bounties:", error);
+      }
+    },
+    [client, accounts, contractAddress, getContractInstance]
+  );
+
+  // const executeFunctionWithUProvider = useCallback(async () => {
+  //   try {
+  //     if (!client) {
+  //       return;
+  //     }
+
+  //     const contract = await getContractInstance(contractAddress, client);
+  //     const data: string = contract.interface.encodeFunctionData("")
+
+  //     const txResponse = await client.sendTransaction({
+  //       account: accounts[0] as `0x${string}`,
+  //       to: contractAddress as `0x${string}`,
+  //       data: data,
+  //     });
+  //     return txResponse;
+  //   } catch (error) {
+  //     console.error("Transaction failed:", error);
+  //     return;
+  //   }
+  // }, [client, chainId, getContractInstance, accounts]);
 
   {
     /**
@@ -103,31 +173,29 @@ export const useSmartContract = () => {
    */
   }
 
-  const getSigner = useCallback(async (): Promise<JsonRpcSigner> => {
-    const browserProvider = await getProvider();
-    return browserProvider.getSigner();
-  }, []);
-
-  const executeFunction = useCallback(
-    async (contractAddress: string, functionName: string, params: any[]) => {
-      try {
-        const signer = await getSigner();
-        const contract = await getContractInstance(contractAddress, signer);
-        const tx = await contract[functionName](...params);
-        await tx.wait();
-        return tx;
-      } catch (error) {
-        console.error("Transaction failed:", error);
-        return;
-      }
-    },
-    [getSigner, getContractInstance]
-  );
+  // const executeFunction = useCallback(
+  //   async (contractAddress: string, functionName: string, params: any[]) => {
+  //     try {
+  //       const signer = await getSigner();
+  //       const contract = await getContractInstance(contractAddress, signer);
+  //       const tx = await contract[functionName](...params);
+  //       await tx.wait();
+  //       return tx;
+  //     } catch (error) {
+  //       console.error("Transaction failed:", error);
+  //       return;
+  //     }
+  //   },
+  //   [getSigner, getContractInstance]
+  // );
 
   return {
-    executeFunction,
-    executeFunctionWithUProvider,
+    // executeFunction,
+    // executeFunctionWithUProvider,
     getSigner,
     getContractInstance,
+
+    getUserBounties,
+    getEthBalance,
   };
 };

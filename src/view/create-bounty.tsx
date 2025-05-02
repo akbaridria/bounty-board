@@ -8,7 +8,7 @@ const CreateBounty = () => {
       <div className="p-4">
         <BackButton />
         <div className="text-lg font-semibold mb-4">Create Bounty</div>
-        <div className="border rounded-lg p-4">
+        <div className="border rounded-lg">
           <FormBounty />
         </div>
       </div>
