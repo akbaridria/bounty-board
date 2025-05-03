@@ -3,21 +3,59 @@ import PageWrapper from "@/components/page-wrapper";
 import Submission from "@/components/submission";
 import TipTapEditor from "@/components/tiptap";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { useSmartContract } from "@/hooks/useSmartContract";
+import { getFileFromIPFS } from "@/lib/pinata";
+import { formatUnixTimestampToRelativeTime } from "@/lib/utils";
 import Avatar from "boring-avatars";
-import { LockIcon, LockOpenIcon, TimerIcon, TrophyIcon } from "lucide-react";
-
-const isActive = true; // This should be replaced with actual logic to determine if the bounty is active
+import { ethers } from "ethers";
+import { TimerIcon, TrophyIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { motion } from "motion/react";
+import FormSubmission from "@/components/form-submission";
 
 const BountyDetail = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState<{
+    title: string;
+    content: string;
+    relativeTime: string;
+    totalPrize: string;
+    editable?: boolean;
+  }>({ content: "", relativeTime: "", title: "", totalPrize: "" });
+  const { id } = useParams();
+
+  const { getBountyDetailById } = useSmartContract();
+
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        const res = await getBountyDetailById(Number(id));
+        if (res) {
+          const dataContent = await getFileFromIPFS(res.cid);
+          setData({
+            title: dataContent?.data?.title || "",
+            content: dataContent?.data?.content || "",
+            relativeTime: formatUnixTimestampToRelativeTime(
+              Number(res.deadline)
+            ),
+            totalPrize: ethers.formatEther(
+              res.prizes.reduce((sum, prize) => sum + prize, BigInt(0))
+            ),
+            editable: Number(res.bountyType) === 0,
+          });
+        }
+      })();
+    }
+  }, [getBountyDetailById, id]);
+
   return (
     <PageWrapper>
       <div className="p-4">
         <BackButton />
         <div className="space-y-6">
-          <div className="text-[1.5rem] font-bold">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-          </div>
+          <div className="text-[1.5rem] font-bold">{data.title || "-"}</div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Avatar
@@ -32,51 +70,36 @@ const BountyDetail = () => {
                 variant="outline"
                 className="bg-muted text-muted-foreground text-xs flex items-center gap-1"
               >
-                <TimerIcon className="w-3 h-3" strokeWidth={2} />9 days left
+                <TimerIcon className="w-3 h-3" strokeWidth={2} />
+                {data.relativeTime}
               </Badge>
               <Badge className="text-xs flex items-center gap-1">
                 <TrophyIcon className="w-3 h-3" strokeWidth={2} />
-                10 LYX
+                {data.totalPrize} LYX
               </Badge>
             </div>
-            <Badge
-              variant="outline"
-              className={cn(
-                "text-xs flex items-center gap-1",
-                isActive
-                  ? "bg-green-100 border-green-600 text-green-800"
-                  : "bg-red-100 border-red-600 text-red-800"
-              )}
-            >
-              {isActive ? (
-                <>
-                  <LockOpenIcon className="w-3 h-3" />
-                  <div>Open</div>
-                </>
-              ) : (
-                <>
-                  <LockIcon className="w-3 h-3" />
-                  <div>Closed</div>
-                </>
-              )}
-            </Badge>
+            {data.editable && (
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                className="mb-4"
+                onClick={() => navigate("/edit/" + id)}
+              >
+                <Button variant="outline" className="text-sm !h-8">
+                  Edit
+                </Button>
+              </motion.button>
+            )}
           </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </div>
+          <TipTapEditor
+            key={data.content}
+            customContent={data.content || "loading..."}
+            editable={false}
+            maxHeight={9999}
+          />
           <div className="space-y-6">
             <div className="text-lg font-semibold">Submissions</div>
             <div className="space-y-2">
-              <TipTapEditor
-                maxHeight={200}
-                customContent="<p>Write your submissions..</p>"
-              />
+              <FormSubmission />
             </div>
             <div className="space-y-3">
               {Array.from({ length: 10 }).map((_, index) => (

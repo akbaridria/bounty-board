@@ -1,34 +1,59 @@
 import { useState, useEffect } from "react";
-import { formatDistance, addHours } from "date-fns";
 import { Badge } from "./ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, formatUnixTimestampToRelativeTime } from "@/lib/utils";
 import { InboxIcon, LockIcon, LockOpenIcon, TrophyIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import { useSmartContract } from "@/hooks/useSmartContract";
+import { getFileFromIPFS } from "@/lib/pinata";
+import TipTapEditor from "./tiptap";
+import { ethers } from "ethers";
 
 type BountyProps = {
   index: number;
+  bountyId?: number;
 };
 
-const Bounty: React.FC<BountyProps> = ({ index }) => {
-  const [timeLeft, setTimeLeft] = useState("");
-  const [isActive] = useState(true);
+const Bounty: React.FC<BountyProps> = ({ index, bountyId }) => {
+  const [data, setData] = useState<{
+    title: string;
+    content: string;
+    relativeTime: string;
+    totalPrize: string;
+    editable?: boolean;
+  }>({
+    title: "",
+    content: "",
+    relativeTime: "",
+    totalPrize: "",
+  });
   const navigate = useNavigate();
 
+  const { getBountyDetailById, getBountySubmissionById } = useSmartContract();
+
   useEffect(() => {
-    const targetTime = addHours(new Date(), 2);
-    const now = new Date();
-
-    if (now >= targetTime) {
-      setTimeLeft("");
-      return;
+    if (typeof bountyId !== "undefined") {
+      (async () => {
+        const res = await getBountyDetailById(bountyId);
+        if (res) {
+          const dataContent = await getFileFromIPFS(res.cid);
+          const dataSubmissions = await getBountySubmissionById(bountyId);
+          console.log(dataSubmissions);
+          setData({
+            title: dataContent?.data?.title || "",
+            content: dataContent?.data?.content || "",
+            relativeTime: formatUnixTimestampToRelativeTime(
+              Number(res.deadline)
+            ),
+            totalPrize: ethers.formatEther(
+              res.prizes.reduce((sum, prize) => sum + prize, BigInt(0))
+            ),
+            editable: Number(res.bountyType) === 0,
+          });
+        }
+      })();
     }
-
-    const formattedDistance = formatDistance(now, targetTime, {
-      addSuffix: false,
-    });
-    setTimeLeft(`${formattedDistance} left`);
-  }, []);
+  }, [bountyId, getBountyDetailById, getBountySubmissionById]);
 
   return (
     <motion.div
@@ -40,41 +65,39 @@ const Bounty: React.FC<BountyProps> = ({ index }) => {
       }}
       whileTap={{ scale: 0.98 }}
       className="border rounded-lg flex flex-col gap-2 cursor-pointer"
-      onClick={() => navigate("/bounty")}
+      onClick={() => navigate("/bounty/" + bountyId)}
     >
       <div className="flex items-center justify-between gap-4 px-4 py-2 border-b">
         <div className="font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
-          Create Meme Create Meme Create Meme Create Meme Create Meme
+          {data.title}
         </div>
         <div className="flex items-center gap-2">
           <Badge
             variant="outline"
             className={cn(
               "text-xs flex items-center gap-1",
-              isActive
+              data.editable
                 ? "bg-green-100 border-green-600 text-green-800"
-                : "bg-red-100 border-red-600 text-red-800"
+                : "bg-yellow-100 border-yellow-600 text-yellow-800"
             )}
           >
-            {isActive ? (
-              <>
-                <LockOpenIcon className="w-3 h-3" />
-                <div>Open</div>
-              </>
+            {data.editable ? (
+              <LockOpenIcon className="w-3 h-3" />
             ) : (
-              <>
-                <LockIcon className="w-3 h-3" />
-                <div>Closed</div>
-              </>
+              <LockIcon className="w-3 h-3" />
             )}
           </Badge>
           <span className="text-sm text-muted-foreground whitespace-nowrap">
-            {timeLeft}
+            {data.relativeTime}
           </span>
         </div>
       </div>
       <div className="text-sm font-medium text-muted-foreground px-4 py-2">
-        this is the content of the bounty.
+        <TipTapEditor
+          key={data.content}
+          customContent={data.content || "loading..."}
+          editable={false}
+        />
       </div>
       <div className="flex items-center justify-between border-t px-4 py-2">
         <div className="border px-2 py-1 rounded-lg bg-muted text-xs font-medium flex items-center gap-1">
@@ -88,7 +111,7 @@ const Bounty: React.FC<BountyProps> = ({ index }) => {
             strokeWidth={2}
           />
           <span className="text-sm font-semibold text-muted-foreground">
-            1.000 LYX
+            {data.totalPrize} LYX
           </span>
         </div>
       </div>

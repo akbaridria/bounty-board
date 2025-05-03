@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { EditorProvider } from "@tiptap/react";
 import MenuBar from "./menu-bar";
 import { extensions } from "./extentions";
@@ -31,7 +30,8 @@ const TipTapEditor: React.FC<{
   maxHeight?: number;
   customContent?: string;
   editable?: boolean;
-}> = ({ maxHeight, customContent, editable = true }) => {
+  onChange?: (html: string) => void;
+}> = ({ maxHeight, customContent, editable = true, onChange }) => {
   return (
     <EditorProvider
       slotBefore={editable ? <MenuBar /> : undefined}
@@ -47,7 +47,11 @@ const TipTapEditor: React.FC<{
           style: `max-height: ${maxHeight ? `${maxHeight}px` : "480px"}`,
         },
       }}
-    ></EditorProvider>
+      onUpdate={(editor) => {
+        const html = editor.editor.getHTML();
+        onChange?.(html);
+      }}
+    />
   );
 };
 

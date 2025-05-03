@@ -9,46 +9,11 @@ import {
 import bountyBoardJson from "../json/bounty-board.json";
 import { useUpProvider } from "../context/UpProvider";
 import { config } from "@/config";
+import { IBounty } from "./type";
 
 export const useSmartContract = () => {
   const { client, accounts } = useUpProvider();
   const contractAddress: `0x${string}` = config.CONTRACT_ADDRESS;
-  {
-    /**
-       In order to send a transaction using `up-provider`, we need to target a specific function of the smart contract,
-       In this case, the target is the `mint` function. The process involves encoding the required parameters for the
-       function in the correct order and then sending the encoded data as part of the transaction.
-      
-       @params {string} contractAddress - The address of the smart contract we want to interact with.
-       @params mintArgs - The arguments for the `mint` function, encoded in the proper format:
-         - `contextAccounts[0]` {string}: The recipient address for the minted tokens.
-         - `ethers.parseUnits(amount.toString(), "wei")` {BigNumber}: The amount to be minted, converted into the smallest
-           unit (e.g., wei or equivalent).
-         - `false` {boolean}: A flag indicating whether the recipient should be notified (default is false).
-         - `"0x"` {string}: Optional data field, typically used for extra information (default is an empty hex string).
-      
-       @example
-       Here's how we encode the data for the `mint` function and send the transaction:
-      
-       // Step 1: Encode the function data
-       const data = contract.interface.encodeFunctionData("mint", [
-         contextAccounts[0],
-         ethers.parseUnits(amount.toString(), "wei"),
-         false,
-         "0x"
-       ]);
-            
-       // Step 2: Send the transaction using the UP provider
-
-       const txResponse = await client.sendTransaction({
-         account: contextAccounts[0] as `0x${string}`, // Sender account, msg.sender
-         to: contractAddress as `0x${string}`,         // Target smart contract address
-         data: data,                                  // Encoded function data
-       });
-            
-       @returns {Promise<void>} Logs the transaction response or throws an error if the transaction fails.
-      */
-  }
 
   const getContractInstance = useCallback(
     async (
@@ -71,6 +36,15 @@ export const useSmartContract = () => {
     const browserProvider = await getProvider();
     return browserProvider.getSigner();
   }, []);
+
+  const getContractInstanceWithProvider =
+    useCallback(async (): Promise<Contract> => {
+      return new ethers.Contract(
+        contractAddress,
+        bountyBoardJson.abi,
+        await getProvider()
+      );
+    }, [contractAddress]);
 
   const getEthBalance = useCallback(
     async (address: string) => {
@@ -107,95 +81,192 @@ export const useSmartContract = () => {
   const getUserBounties = useCallback(
     async (creatorAddress: string) => {
       try {
-        if (!client || !accounts?.[0]) {
+        if (!client) {
+          return;
+        }
+        const contract = await getContractInstanceWithProvider();
+        const res = await contract.getUserBounties(creatorAddress);
+        return (res || []) as number[];
+      } catch (error) {
+        console.error("Failed to fetch user bounties:", error);
+        return [];
+      }
+    },
+    [client, getContractInstanceWithProvider]
+  );
+
+  const createBounty = useCallback(
+    async (
+      _title: string,
+      _cid: string,
+      _deadline: number,
+      _resultDeadline: number,
+      _minParticipants: number,
+      _totalWinners: number,
+      _totalPrizes: number[],
+      _bountyType: number
+    ) => {
+      try {
+        if (!client) {
+          return;
+        }
+        const contract = await getContractInstance(contractAddress, client);
+        const prizesInWei = _totalPrizes.map((prize) =>
+          ethers.parseEther(String(prize))
+        );
+
+        const data = contract.interface.encodeFunctionData("createBounty", [
+          _cid,
+          _deadline,
+          _resultDeadline,
+          _minParticipants,
+          _totalWinners,
+          prizesInWei,
+          _bountyType,
+        ]);
+
+        const totalPrizeValue = prizesInWei.reduce(
+          (sum, prize) => sum + prize,
+          BigInt(0)
+        );
+
+        const fee = (totalPrizeValue * BigInt(5)) / BigInt(100);
+        const totalValue = totalPrizeValue + fee;
+
+        await client.sendTransaction({
+          account: accounts[0] as `0x${string}`,
+          to: contractAddress as `0x${string}`,
+          data: data,
+          value: totalValue,
+        });
+        return true;
+      } catch (error) {
+        console.log("Transaction failed:", error);
+        return false;
+      }
+    },
+    [accounts, client, contractAddress, getContractInstance]
+  );
+
+  const editBounty = useCallback(
+    async (
+      _bountyId: number,
+      _cid: string,
+      _deadline: number,
+      _resultDeadline: number,
+      _minParticipants: number,
+      _totalWinners: number,
+      _totalPrizes: number[]
+    ) => {
+      try {
+        if (!client) {
           return;
         }
 
         const contract = await getContractInstance(contractAddress, client);
-        const data = contract.interface.encodeFunctionData("getUserBounties", [
-          creatorAddress,
+        const prizesInWei = _totalPrizes.map((prize) =>
+          ethers.parseEther(String(prize))
+        );
+
+        const data = contract.interface.encodeFunctionData("editBounty", [
+          _bountyId,
+          _cid,
+          _deadline,
+          _resultDeadline,
+          _minParticipants,
+          _totalWinners,
+          prizesInWei,
         ]);
 
-        const result = await client.request({
-          method: "eth_call",
-          params: [
-            {
-              to: contractAddress,
-              data: data,
-            },
-            "latest",
-          ],
-        });
+        const totalPrizeValue = prizesInWei.reduce(
+          (sum, prize) => sum + prize,
+          BigInt(0)
+        );
 
-        // Decode the result
-        return contract.interface.decodeFunctionResult(
-          "getUserBounties",
-          result
-        )[0];
+        const fee = (totalPrizeValue * BigInt(5)) / BigInt(100);
+        const totalValue = totalPrizeValue + fee;
+
+        await client.sendTransaction({
+          account: accounts[0] as `0x${string}`,
+          to: contractAddress as `0x${string}`,
+          data: data,
+          value: totalValue,
+        });
+        return true;
       } catch (error) {
-        console.error("Failed to fetch user bounties:", error);
+        console.log("Transaction failed:", error);
+        return false;
       }
     },
-    [client, accounts, contractAddress, getContractInstance]
+    [accounts, client, contractAddress, getContractInstance]
   );
 
-  // const executeFunctionWithUProvider = useCallback(async () => {
-  //   try {
-  //     if (!client) {
-  //       return;
-  //     }
+  const getBountyDetailById = useCallback(
+    async (id: number) => {
+      try {
+        const contract = await getContractInstanceWithProvider();
+        const bounty = await contract.getBounty(id);
+        return bounty as IBounty;
+      } catch (error) {
+        console.log("Failed to fetch bounty details:", error);
+        return null;
+      }
+    },
+    [getContractInstanceWithProvider]
+  );
 
-  //     const contract = await getContractInstance(contractAddress, client);
-  //     const data: string = contract.interface.encodeFunctionData("")
+  const getBountySubmissionById = useCallback(
+    async (id: number) => {
+      try {
+        const contract = await getContractInstanceWithProvider();
+        const bounty = await contract.getBountySubmissions(id);
+        return bounty;
+      } catch (error) {
+        console.log("Failed to fetch bounty details:", error);
+        return null;
+      }
+    },
+    [getContractInstanceWithProvider]
+  );
 
-  //     const txResponse = await client.sendTransaction({
-  //       account: accounts[0] as `0x${string}`,
-  //       to: contractAddress as `0x${string}`,
-  //       data: data,
-  //     });
-  //     return txResponse;
-  //   } catch (error) {
-  //     console.error("Transaction failed:", error);
-  //     return;
-  //   }
-  // }, [client, chainId, getContractInstance, accounts]);
+  const createSubmission = useCallback(
+    async (_bountyId: number, _cid: string) => {
+      try {
+        if (!client) {
+          return;
+        }
 
-  {
-    /**
-   This is the method to interact with the smart contract using ethers.js. While this approach is valid,
-   we recommend using the `up-provider` for interacting with the blockchain whenever possible.
-  
-   Why use `up-provider`?
-   - Simplified integration with the Universal Profile ecosystem.
-   - Enhanced security by leveraging the UP infrastructure.
+        const contract = await getContractInstance(contractAddress, client);
 
-   With `up-provider`, the interaction is abstracted, reducing complexity and potential errors.
-   */
-  }
+        const data = contract.interface.encodeFunctionData("createSubmission", [
+          _bountyId,
+          _cid,
+        ]);
 
-  // const executeFunction = useCallback(
-  //   async (contractAddress: string, functionName: string, params: any[]) => {
-  //     try {
-  //       const signer = await getSigner();
-  //       const contract = await getContractInstance(contractAddress, signer);
-  //       const tx = await contract[functionName](...params);
-  //       await tx.wait();
-  //       return tx;
-  //     } catch (error) {
-  //       console.error("Transaction failed:", error);
-  //       return;
-  //     }
-  //   },
-  //   [getSigner, getContractInstance]
-  // );
+        await client.sendTransaction({
+          account: accounts[0] as `0x${string}`,
+          to: contractAddress as `0x${string}`,
+          data: data,
+        });
+        return true;
+      } catch (error) {
+        console.log("Transaction failed:", error);
+        return false;
+      }
+    },
+    [accounts, client, contractAddress, getContractInstance]
+  );
 
   return {
-    // executeFunction,
-    // executeFunctionWithUProvider,
     getSigner,
     getContractInstance,
 
     getUserBounties,
     getEthBalance,
+    createBounty,
+    getBountyDetailById,
+    getBountySubmissionById,
+    editBounty,
+    createSubmission,
   };
 };

@@ -13,12 +13,16 @@ const Router = [
     children: [{ path: "*", element: <Navigate to="/" /> }],
   },
   {
-    path: "/bounty",
+    path: "/bounty/:id",
     element: <BountyDetail />,
   },
   {
     path: "/create-bounty",
     element: <CreateBounty />,
+  },
+  {
+    path: "/edit/:id",
+    element: <CreateBounty mode="edit" />,
   },
 ];
 

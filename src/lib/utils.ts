@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { formatDistance, fromUnixTime } from "date-fns";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -41,3 +42,20 @@ export function getOrdinalParts(n: number): { num: number; suffix: string } {
       return { num: n, suffix: "th" };
   }
 }
+
+export const formatUnixTimestampToRelativeTime = (
+  unixTimestampInSeconds: number,
+  options = {}
+) => {
+  // Convert Unix timestamp (seconds) to Date object
+  const date = fromUnixTime(unixTimestampInSeconds);
+
+  // Get current date
+  const now = new Date();
+
+  // Format the distance between the dates
+  return formatDistance(date, now, {
+    addSuffix: true, // adds "ago" or "in" prefix/suffix
+    ...options,
+  });
+};
