@@ -27,7 +27,6 @@ const Submission: React.FC<SubmissionProps> = ({ data }) => {
     if (data) {
       (async () => {
         const dataContent = await getFileFromIPFS(data.cid);
-        console.log(dataContent, "dataContent");
         if (dataContent) {
           setSubmission((prev) => ({
             ...prev,
