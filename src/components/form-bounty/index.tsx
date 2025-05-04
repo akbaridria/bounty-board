@@ -164,7 +164,6 @@ const FormBounty: React.FC<FormBountyProps> = ({ mode }) => {
     toast.promise(uploadFileToIPFS(file), {
       loading: "Uploading content to IPFS...",
       success: (res) => {
-        console.log(res, "res");
         if (mode === "edit") {
           editTx(res.data.cid);
         }

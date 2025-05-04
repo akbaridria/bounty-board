@@ -14,7 +14,6 @@ const useProfiles = (address = '') => {
       queryUP<ProfileQueryResponse>(QUERY_PROFILE_BY_ADDRESS, {
         id: (address || contextAccounts[0])?.toLowerCase(),
       }).then((res) => {
-        console.log(res);
         setProfile(res?.profile);
       });
     }

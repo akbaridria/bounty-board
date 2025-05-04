@@ -19,11 +19,14 @@ const FormSubmission = () => {
       toast.promise(createSubmission(Number(id), cid), {
         loading: "Creating submission...",
         success: async (res) => {
-          if (res)
+            if (res) {
+            window.location.reload();
+            
             return {
               message: "Submission created successfully!",
               type: "success",
-            };
+            }; 
+            }
           return { message: "Failed to create submission", type: "error" };
         },
         error: (err) => {

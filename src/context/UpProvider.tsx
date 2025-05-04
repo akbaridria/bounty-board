@@ -74,7 +74,6 @@ export function UpProvider({ children }: UpProviderProps) {
   const [isSearching, setIsSearching] = useState(false);
 
   const client: WalletClient | null = useMemo(() => {
-    console.log("client", provider);
     if (provider && chainId) {
       return createWalletClient({
         chain: chainId === 42 ? lukso : luksoTestnet,
