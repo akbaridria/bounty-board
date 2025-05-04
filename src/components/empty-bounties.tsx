@@ -1,15 +1,13 @@
-import Header from "@/components/header";
-import ListBounties from "@/components/list-bounties";
-import PageWrapper from "@/components/page-wrapper";
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { useUpProvider } from "@/context/UpProvider";
-import { PlusIcon } from "lucide-react";
-import { motion } from "motion/react";
+import { ArchiveXIcon } from "lucide-react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-function App() {
+const EmptyBounties = () => {
   const navigate = useNavigate();
   const { accounts, contextAccounts, walletConnected } = useUpProvider();
 
@@ -30,21 +28,20 @@ function App() {
   }, [accounts, contextAccounts, navigate, walletConnected]);
 
   return (
-    <PageWrapper>
-      <Header />
-      <ListBounties />
-      <div className="fixed bottom-4 right-4">
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          onClick={() => goToCreateBounty()}
-        >
-          <Button size="icon" className="rounded-full">
-            <PlusIcon />
-          </Button>
-        </motion.button>
+    <div className="flex min-h-[400px] flex-col items-center justify-center rounded-md border border-dashed p-8 text-center animate-in fade-in-50">
+      <div className="mx-auto flex max-w-[420px] flex-col items-center justify-center text-center">
+        <ArchiveXIcon className="h-10 w-10 text-muted-foreground mb-4" />
+        <h3 className="mt-2 text-lg font-semibold">No Bounties Found</h3>
+        <p className="mt-1 text-sm text-muted-foreground">
+          You haven't created any bounties yet. Start by creating your first
+          bounty.
+        </p>
+        <div className="mt-6">
+          <Button onClick={goToCreateBounty}>Create Bounty</Button>
+        </div>
       </div>
-    </PageWrapper>
+    </div>
   );
-}
+};
 
-export default App;
+export default EmptyBounties;

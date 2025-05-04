@@ -59,3 +59,14 @@ export const formatUnixTimestampToRelativeTime = (
     ...options,
   });
 };
+
+export const getLatstDeadline = (deadline: number, resultDeadline: number) => {
+  const currentTimestamp = Math.floor(Date.now() / 1000);
+  if (currentTimestamp < deadline) {
+    return formatUnixTimestampToRelativeTime(deadline);
+  } else if (currentTimestamp < resultDeadline) {
+    return formatUnixTimestampToRelativeTime(resultDeadline);
+  } else {
+    return '';
+  }
+};

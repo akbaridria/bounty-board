@@ -11,3 +11,9 @@ export interface IBounty {
   selectedWinners: bigint[];
   bountyType: bigint;
 }
+
+export interface IBountySubmission {
+  cid: string;
+  participant: string;
+  timestamp: bigint;
+}

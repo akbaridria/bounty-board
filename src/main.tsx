@@ -9,7 +9,7 @@ createRoot(document.getElementById("root")!).render(
   <UpProvider>
     <BrowserRouter>
       <App />
-      <Toaster />
+      <Toaster position="top-center" />
     </BrowserRouter>
   </UpProvider>
 );

@@ -4,12 +4,13 @@ import {
   Contract,
   ethers,
   formatEther,
+  JsonRpcProvider,
   JsonRpcSigner,
 } from "ethers";
 import bountyBoardJson from "../json/bounty-board.json";
 import { useUpProvider } from "../context/UpProvider";
 import { config } from "@/config";
-import { IBounty } from "./type";
+import { IBounty, IBountySubmission } from "./type";
 
 export const useSmartContract = () => {
   const { client, accounts } = useUpProvider();
@@ -32,17 +33,21 @@ export const useSmartContract = () => {
     return new ethers.BrowserProvider(window.lukso);
   };
 
+  const getProviderRPC = async (): Promise<JsonRpcProvider> => {
+    return new ethers.JsonRpcProvider(config.RPC_URL);
+  };
+
   const getSigner = useCallback(async (): Promise<JsonRpcSigner> => {
     const browserProvider = await getProvider();
     return browserProvider.getSigner();
   }, []);
 
-  const getContractInstanceWithProvider =
+  const getContractInstanceWithRPCProvider =
     useCallback(async (): Promise<Contract> => {
       return new ethers.Contract(
         contractAddress,
         bountyBoardJson.abi,
-        await getProvider()
+        await getProviderRPC()
       );
     }, [contractAddress]);
 
@@ -81,10 +86,7 @@ export const useSmartContract = () => {
   const getUserBounties = useCallback(
     async (creatorAddress: string) => {
       try {
-        if (!client) {
-          return;
-        }
-        const contract = await getContractInstanceWithProvider();
+        const contract = await getContractInstanceWithRPCProvider();
         const res = await contract.getUserBounties(creatorAddress);
         return (res || []) as number[];
       } catch (error) {
@@ -92,7 +94,7 @@ export const useSmartContract = () => {
         return [];
       }
     },
-    [client, getContractInstanceWithProvider]
+    [getContractInstanceWithRPCProvider]
   );
 
   const createBounty = useCallback(
@@ -204,7 +206,7 @@ export const useSmartContract = () => {
   const getBountyDetailById = useCallback(
     async (id: number) => {
       try {
-        const contract = await getContractInstanceWithProvider();
+        const contract = await getContractInstanceWithRPCProvider();
         const bounty = await contract.getBounty(id);
         return bounty as IBounty;
       } catch (error) {
@@ -212,21 +214,38 @@ export const useSmartContract = () => {
         return null;
       }
     },
-    [getContractInstanceWithProvider]
+    [getContractInstanceWithRPCProvider]
   );
 
   const getBountySubmissionById = useCallback(
     async (id: number) => {
       try {
-        const contract = await getContractInstanceWithProvider();
+        const contract = await getContractInstanceWithRPCProvider();
         const bounty = await contract.getBountySubmissions(id);
-        return bounty;
+        return bounty as IBountySubmission[];
       } catch (error) {
         console.log("Failed to fetch bounty details:", error);
         return null;
       }
     },
-    [getContractInstanceWithProvider]
+    [getContractInstanceWithRPCProvider]
+  );
+
+  const isParticipantOfBounty = useCallback(
+    async (_bountyId: number | string, _address: string) => {
+      try {
+        const contract = await getContractInstanceWithRPCProvider();
+        const isParticipant = contract.isParticipantOfBounty(
+          _bountyId,
+          _address
+        );
+        return isParticipant;
+      } catch (error) {
+        console.log("Failed to check if participant of bounty:", error);
+        return false;
+      }
+    },
+    [getContractInstanceWithRPCProvider]
   );
 
   const createSubmission = useCallback(
@@ -257,6 +276,60 @@ export const useSmartContract = () => {
     [accounts, client, contractAddress, getContractInstance]
   );
 
+  const cancelBounty = useCallback(
+    async (_bountyId: number) => {
+      try {
+        if (!client) {
+          return;
+        }
+
+        const contract = await getContractInstance(contractAddress, client);
+
+        const data = contract.interface.encodeFunctionData("cancelBounty", [
+          _bountyId,
+        ]);
+
+        await client.sendTransaction({
+          account: accounts[0] as `0x${string}`,
+          to: contractAddress as `0x${string}`,
+          data: data,
+        });
+        return true;
+      } catch (error) {
+        console.log("Transaction failed:", error);
+        return false;
+      }
+    },
+    [accounts, client, contractAddress, getContractInstance]
+  );
+
+  const selectWinners = useCallback(
+    async (_bountyId: number, winners: string[]) => {
+      try {
+        if (!client) {
+          return;
+        }
+
+        const contract = await getContractInstance(contractAddress, client);
+
+        const data = contract.interface.encodeFunctionData("selectWinners", [
+          _bountyId,
+          winners
+        ]);
+
+        await client.sendTransaction({
+          account: accounts[0] as `0x${string}`,
+          to: contractAddress as `0x${string}`,
+          data: data,
+        });
+        return true;
+      } catch (error) {
+        console.log("Transaction failed:", error);
+        return false;
+      }
+    },
+    [accounts, client, contractAddress, getContractInstance]
+  );
   return {
     getSigner,
     getContractInstance,
@@ -268,5 +341,8 @@ export const useSmartContract = () => {
     getBountySubmissionById,
     editBounty,
     createSubmission,
+    isParticipantOfBounty,
+    cancelBounty,
+    selectWinners,
   };
 };
