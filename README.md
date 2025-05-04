@@ -1,62 +1,57 @@
-# Mini-app vite template
+# 🏆 BountyBoard
 
-A template project demonstrating how to build mini-apps using the [up-provider package](https://github.com/lukso-network/tools-up-provider) and interacting with Universal Profiles on [Universal Everything](https://universaleverything.io), built with [Vite.js](https://vite.dev).
+A decentralized bounty creation and fulfillment platform built on blockchain technology.
 
-# Introduction
+> **Quick Links:**  
+> 📝 [Smart Contract Repository](https://github.com/akbaridria/bounty-board-contract)  
+> 🔄 [dApp Worker Service](https://github.com/akbaridria/bounty-board-server)
 
-Welcome to the Hangman game with blockchain integration! This single-player game combines the fun of Hangman with the power of LUKSO technology, offering an innovative experience where your achievements are recorded on the blockchain.
+## 📖 Overview
 
-The application use the Universal Profile system to authenticate users and interact with smart contracts. This ensures a secure and seamless experience.
+BountyBoard is a mini dApp that enables users to create and participate in bounties in a fully decentralized way. Bounty creators can post tasks, and hunters can submit solutions to earn rewards. All bounty content is stored on IPFS while settlements happen on-chain, ensuring transparency and immutability.
 
-# Features
+## 🪜 Sequence Diagram
 
-Login: Login on [Universal Everithing](https://universaleverything.io) with your UP and use [TheGrid] to interact with the miniapp.
+sequenceDiagram
+    actor Creator
+    actor Hunter
+    participant BountyBoard
+    participant IPFS
+    participant Blockchain
 
-Interactive Gameplay: Play the classic Hangman game with an engaging user interface.
+    %% Bounty Creation
+    Creator->>IPFS: Store bounty details
+    IPFS-->>Creator: Return CID
+    Creator->>BountyBoard: createBounty(cid, deadlines, prizes, type)
+    BountyBoard->>Blockchain: Lock funds (prizes + fee)
+    Blockchain-->>BountyBoard: Confirm transaction
+    BountyBoard-->>Creator: Bounty created successfully
 
-Blockchain Integration: Leverage blockchain technology for secure transactions and interactions, in this scenarios blockchain is used to monitor your win and to reward the winner with a prize.
+    %% Submission
+    Hunter->>IPFS: Store submission details
+    IPFS-->>Hunter: Return CID
+    Hunter->>BountyBoard: createSubmission(bountyId, cid)
+    BountyBoard->>Blockchain: Record submission
+    Blockchain-->>BountyBoard: Confirm transaction
+    BountyBoard-->>Hunter: Submission recorded successfully
 
-Universal Profile Support: Easily authenticate and manage your profile with the Lukso Universal Profile system, this one garantee a smooth and fluid user experience, it garantee a gasless interaction, in this way users can play to the game without thinking to pay gasfees.
+    %% Winner Selection
+    Creator->>BountyBoard: selectWinners(bountyId, winners)
+    BountyBoard->>Blockchain: Transfer prizes to winners
+    Blockchain-->>BountyBoard: Confirm transfers
+    BountyBoard-->>Creator: Winners selected, prizes distributed
 
-## GETTING STARTED
+## ✨ Features
 
-# Install dependencies
-
-```bash
-npm install
-
-npm run dev
-
-open your browser and go to http://localhost:5173 to play the game!
-```
-
-## How to integrate your project into The Grid
-
-    1.	Deploy your app. You can use Vercel or your favorite cloud platform.
-    2.	Go to Universal Everything and add new content to The Grid.
-    3.	Choose the “Website” option and paste the URL of your dApp. If you use [Vercel], you can refer to their documentation.
-    4.	Now you can see your dApp on The Grid! Let’s start playing!
-
-## Project Structure
-
-- `src/context/UpProvider.tsx`: Core UP Provider implementation and wallet connection logic.
-- `src/hooks/useSmartContract.tsx`: It contains the logic to interact with the blockchain, with ethers.js or with UpProvider.
-- `src/components/`: All Components used to build the HangmanGame.
-- `src/view/`: Is the interface that you see when you start the game.
-
-# Tech Stack
-
-- [React]: Frontend framework for building interactive UIs.
-- [Vite]: Development environment for fast builds and hot module replacement.
-- [Tailwind]: Styling framework for a sleek and modern design.
-- [Ethers.js]: Library for interacting with Ethereum blockchain. -[@lukso/up-provider](https://github.com/lukso-network/tools-up-provider/tree/main): Facilitates integration with the Universal Profile ecosystem.
-
-## Learn More
-
-- [LUKSO Documentation](https://docs.lukso.tech/) - Learn about LUKSO ecosystem
-- [UP Browser Extension](https://docs.lukso.tech/guides/browser-extension/install) - Install the Universal Profile Browser Extension
-
-## Contributing
-
-Contributions are welcome! Feel free to submit issues and pull requests.
-
+- **Two Bounty Types:**
+  - **Editable Bounties**: Can be modified after creation (prize amount, deadline, etc.)
+  - **Non-Editable Bounties**: Immutable after creation for maximum transparency
+  
+- **Automated Prize Distribution:**
+  - Auto-payout when a winner is selected
+  - Fair distribution of prize among all participants if no winner is selected after the review deadline
+  
+- **Multiple Prize Options:**
+  - Support for native LYX tokens (✅)
+  - Support for LSP7 tokens (soon)
+  - Support for LSP8 tokens (soon)
