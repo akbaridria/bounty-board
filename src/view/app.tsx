@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import ListBounties from "@/components/list-bounties";
 import PageWrapper from "@/components/page-wrapper";
 import { Button } from "@/components/ui/button";
+import WalletNotConnected from "@/components/wallet-not-connected";
 import { useUpProvider } from "@/context/UpProvider";
 import { PlusIcon } from "lucide-react";
 import { motion } from "motion/react";
@@ -28,6 +29,13 @@ function App() {
       }
     }
   }, [accounts, contextAccounts, navigate, walletConnected]);
+
+  if (!walletConnected)
+    return (
+      <div className="flex h-screen w-screen items-center justify-center p-4">
+        <WalletNotConnected />
+      </div>
+    );
 
   return (
     <PageWrapper>
