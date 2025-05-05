@@ -5,6 +5,7 @@ import { useUpProvider } from "@/context/UpProvider";
 import EmptyBounties from "./empty-bounties";
 import { Button } from "./ui/button";
 import { RotateCwIcon } from "lucide-react";
+import Spinner from "./spinner";
 
 const ListBounties = () => {
   const { contextAccounts } = useUpProvider();
@@ -17,13 +18,17 @@ const ListBounties = () => {
     if (contextAccounts.length > 0) {
       const bounties = await getUserBounties(contextAccounts[0]);
       setListBounties(bounties || []);
+      setLoading(false);
     }
-    setLoading(false);
   }, [contextAccounts, getUserBounties]);
 
   useEffect(() => {
     getBounties();
   }, [getBounties]);
+
+  if (loading) return <div className="flex items-center justify-center w-full h-32">
+    <Spinner />
+  </div>;
 
   return (
     <>
