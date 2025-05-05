@@ -12,6 +12,7 @@ BountyBoard is a mini dApp that enables users to create and participate in bount
 
 ## 🪜 Sequence Diagram
 
+```mermaid
 sequenceDiagram
     actor Creator
     actor Hunter
@@ -40,6 +41,7 @@ sequenceDiagram
     BountyBoard->>Blockchain: Transfer prizes to winners
     Blockchain-->>BountyBoard: Confirm transfers
     BountyBoard-->>Creator: Winners selected, prizes distributed
+```
 
 ## ✨ Features
 
