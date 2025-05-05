@@ -5,10 +5,11 @@ import { Button } from "./ui/button";
 import { useSmartContract } from "@/hooks/useSmartContract";
 import { toast } from "sonner";
 import { uploadFileToIPFS } from "@/lib/pinata";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const FormSubmission = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { createSubmission } = useSmartContract();
   const [content, setContent] = useState<string>(
     "<p>Write your submissions..</p>"
@@ -20,7 +21,7 @@ const FormSubmission = () => {
         loading: "Creating submission...",
         success: async (res) => {
             if (res) {
-            window.location.reload();
+            navigate(0);
             
             return {
               message: "Submission created successfully!",
@@ -54,7 +55,7 @@ const FormSubmission = () => {
         return `Error uploading file: ${err.message}`;
       },
     });
-  }, [content, createSubmission, id]);
+  }, [content, createSubmission, id, navigate]);
   return (
     <>
       <TipTapEditor
