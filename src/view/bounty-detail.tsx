@@ -9,7 +9,7 @@ import { getLatstDeadline } from "@/lib/utils";
 import Avatar from "boring-avatars";
 import { ethers } from "ethers";
 import { Edit3Icon, EllipsisIcon, TimerIcon, TrophyIcon } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "motion/react";
 import FormSubmission from "@/components/form-submission";
@@ -63,17 +63,19 @@ const BountyDetail = () => {
     }
   }, [data]);
 
+  const getParticipantOfBounty = useCallback(async () => {
+    const res = await isParticipantOfBounty(
+      Number(id),
+      accounts[0] as `0x${string}`
+    );
+    setIsParticipant(res);
+  }, [accounts, id, isParticipantOfBounty]);
+
   useEffect(() => {
     if (accounts?.[0]) {
-      (async () => {
-        const res = await isParticipantOfBounty(
-          Number(id),
-          accounts[0] as `0x${string}`
-        );
-        setIsParticipant(res);
-      })();
+      getParticipantOfBounty();
     }
-  }, [accounts, id, isParticipantOfBounty]);
+  }, [accounts, getParticipantOfBounty, id]);
 
   const isSubmissionAllowed = useMemo(() => {
     if (contextAccounts?.[0] && accounts?.[0])
@@ -84,37 +86,39 @@ const BountyDetail = () => {
     return false;
   }, [contextAccounts, accounts, data.isActive]);
 
+  const getBountyDetail = useCallback(async () => {
+    setLoading(true);
+    const res = await getBountyDetailById(Number(id));
+    if (res) {
+      const dataContent = await getFileFromIPFS(res.cid);
+      setData({
+        isActive: res.isActive,
+        title: dataContent?.data?.title || "",
+        content: dataContent?.data?.content || "",
+        relativeTime: getLatstDeadline(
+          Number(res.deadline),
+          Number(res.resultDeadline)
+        ),
+        totalPrize: ethers.formatEther(
+          res.prizes.reduce((sum, prize) => sum + prize, BigInt(0))
+        ),
+        editable:
+          Number(res.bountyType) === 0 &&
+          res.creator?.toLowerCase() === accounts?.[0]?.toLowerCase() &&
+          res.isActive,
+        deadline: res.deadline,
+        resultDeadline: res.resultDeadline,
+        totalwinners: Number(res.totalWinners),
+      });
+    }
+    setLoading(false);
+  }, [accounts, getBountyDetailById, id]);
+
   useEffect(() => {
     if (id) {
-      (async () => {
-        setLoading(true);
-        const res = await getBountyDetailById(Number(id));
-        if (res) {
-          const dataContent = await getFileFromIPFS(res.cid);
-          setData({
-            isActive: res.isActive,
-            title: dataContent?.data?.title || "",
-            content: dataContent?.data?.content || "",
-            relativeTime: getLatstDeadline(
-              Number(res.deadline),
-              Number(res.resultDeadline)
-            ),
-            totalPrize: ethers.formatEther(
-              res.prizes.reduce((sum, prize) => sum + prize, BigInt(0))
-            ),
-            editable:
-              Number(res.bountyType) === 0 &&
-              res.creator?.toLowerCase() === accounts?.[0]?.toLowerCase() &&
-              res.isActive,
-            deadline: res.deadline,
-            resultDeadline: res.resultDeadline,
-            totalwinners: Number(res.totalWinners),
-          });
-        }
-        setLoading(false);
-      })();
+      getBountyDetail();
     }
-  }, [accounts, getBountyDetailById, id]);
+  }, [getBountyDetail, id]);
 
   const isInReview = useMemo(() => {
     if (data?.resultDeadline) {
@@ -205,7 +209,14 @@ const BountyDetail = () => {
           <div className="space-y-6">
             <div className="text-lg font-semibold">Submissions</div>
             <div className="space-y-2">
-              {isSubmissionAllowed && !isParticipant && <FormSubmission />}
+              {isSubmissionAllowed && !isParticipant && (
+                <FormSubmission
+                  callback={() => {
+                    getBountyDetail();
+                    getParticipantOfBounty();
+                  }}
+                />
+              )}
             </div>
             <div className="space-y-3">
               <ListSubmissions />

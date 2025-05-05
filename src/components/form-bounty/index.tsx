@@ -8,7 +8,7 @@ import { Form } from "@/components/ui/form";
 import { useSmartContract } from "@/hooks/useSmartContract";
 import { useUpProvider } from "@/context/UpProvider";
 import { Separator } from "@/components/ui/separator";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormSchema } from "./constant";
 import { toast } from "sonner";
 import { getFileFromIPFS, uploadFileToIPFS } from "@/lib/pinata";
@@ -38,35 +38,37 @@ const FormBounty: React.FC<FormBountyProps> = ({ mode }) => {
     },
   });
 
+  const getBountyDetail = useCallback(async () => {
+    const res = await getBountyDetailById(Number(id));
+    if (res) {
+      const dataContent = await getFileFromIPFS(res.cid);
+      if (dataContent) {
+        setDefaultContent(dataContent?.data?.content);
+        form.setValue("title", dataContent.data.title);
+        form.setValue("content", dataContent.data.content);
+        form.setValue("deadline", new Date(Number(res.deadline) * 1000));
+        form.setValue(
+          "resultDeadline",
+          new Date(Number(res.resultDeadline) * 1000)
+        );
+        form.setValue("minParticipants", Number(res.minParticipants));
+        form.setValue("totalWinners", Number(res.totalWinners));
+        form.setValue("bountyType", Number(res.bountyType));
+        form.setValue(
+          "prizes",
+          res.prizes.map((prize: bigint) => ({
+            value: Number(ethers.formatEther(prize)),
+          }))
+        );
+      }
+    }
+  }, [getBountyDetailById, id, form]);
+
   useEffect(() => {
     if (mode === "edit" && id) {
-      (async () => {
-        const res = await getBountyDetailById(Number(id));
-        if (res) {
-          const dataContent = await getFileFromIPFS(res.cid);
-          if (dataContent) {
-            setDefaultContent(dataContent?.data?.content);
-            form.setValue("title", dataContent.data.title);
-            form.setValue("content", dataContent.data.content);
-            form.setValue("deadline", new Date(Number(res.deadline) * 1000));
-            form.setValue(
-              "resultDeadline",
-              new Date(Number(res.resultDeadline) * 1000)
-            );
-            form.setValue("minParticipants", Number(res.minParticipants));
-            form.setValue("totalWinners", Number(res.totalWinners));
-            form.setValue("bountyType", Number(res.bountyType));
-            form.setValue(
-              "prizes",
-              res.prizes.map((prize: bigint) => ({
-                value: Number(ethers.formatEther(prize)),
-              }))
-            );
-          }
-        }
-      })();
+      getBountyDetail();
     }
-  }, [mode, id, getBountyDetailById, form]);
+  }, [mode, id, getBountyDetail]);
 
   const { fields, replace } = useFieldArray({
     control: form.control,
@@ -132,7 +134,7 @@ const FormBounty: React.FC<FormBountyProps> = ({ mode }) => {
           Math.floor(data.resultDeadline.getTime() / 1000),
           data.minParticipants,
           data.totalWinners,
-          data.prizes.map((prize) => prize.value),
+          data.prizes.map((prize) => prize.value)
         ),
         {
           loading: "Editing bounty...",

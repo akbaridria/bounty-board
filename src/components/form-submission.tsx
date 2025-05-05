@@ -5,11 +5,13 @@ import { Button } from "./ui/button";
 import { useSmartContract } from "@/hooks/useSmartContract";
 import { toast } from "sonner";
 import { uploadFileToIPFS } from "@/lib/pinata";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const FormSubmission = () => {
+interface FormSubmissionProps {
+  callback?: () => void;
+}
+const FormSubmission: React.FC<FormSubmissionProps> = ({ callback }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { createSubmission } = useSmartContract();
   const [content, setContent] = useState<string>(
     "<p>Write your submissions..</p>"
@@ -20,14 +22,14 @@ const FormSubmission = () => {
       toast.promise(createSubmission(Number(id), cid), {
         loading: "Creating submission...",
         success: async (res) => {
-            if (res) {
-            navigate(0);
-            
+          if (res) {
+            callback?.();
+
             return {
               message: "Submission created successfully!",
               type: "success",
-            }; 
-            }
+            };
+          }
           return { message: "Failed to create submission", type: "error" };
         },
         error: (err) => {
@@ -55,7 +57,7 @@ const FormSubmission = () => {
         return `Error uploading file: ${err.message}`;
       },
     });
-  }, [content, createSubmission, id, navigate]);
+  }, [callback, content, createSubmission, id]);
   return (
     <>
       <TipTapEditor

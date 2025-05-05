@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import {
   BrowserProvider,
   Contract,
@@ -11,6 +11,8 @@ import bountyBoardJson from "../json/bounty-board.json";
 import { useUpProvider } from "../context/UpProvider";
 import { config } from "@/config";
 import { IBounty, IBountySubmission } from "./type";
+import { createPublicClient, http } from "viem";
+import { luksoTestnet } from "viem/chains";
 
 export const useSmartContract = () => {
   const { client, accounts } = useUpProvider();
@@ -25,6 +27,13 @@ export const useSmartContract = () => {
     },
     []
   );
+
+  const publicClient = useMemo(() => {
+    return createPublicClient({
+      chain: luksoTestnet,
+      transport: http(config.RPC_URL),
+    })
+  }, [])
 
   const getProvider = async (): Promise<BrowserProvider> => {
     if (!window.lukso) {
@@ -135,19 +144,37 @@ export const useSmartContract = () => {
         const fee = (totalPrizeValue * BigInt(5)) / BigInt(100);
         const totalValue = totalPrizeValue + fee;
 
-        await client.sendTransaction({
+        // Send the transaction and get the hash
+        const txResponse = await client.sendTransaction({
           account: accounts[0] as `0x${string}`,
           to: contractAddress as `0x${string}`,
           data: data,
           value: totalValue,
         });
-        return true;
+
+        console.log("Transaction sent:", txResponse);
+
+        // Wait for the transaction to be mined
+        const txReceipt = await publicClient.waitForTransactionReceipt({
+          hash: txResponse,
+        });
+
+        console.log("Transaction confirmed:", txReceipt);
+
+        // Check if the transaction was successful
+        if (txReceipt.status === "success") {
+          console.log("Bounty created successfully!");
+          return true;
+        } else {
+          console.log("Bounty creation failed:", txReceipt);
+          return false;
+        }
       } catch (error) {
         console.log("Transaction failed:", error);
         return false;
       }
     },
-    [accounts, client, contractAddress, getContractInstance]
+    [accounts, client, contractAddress, getContractInstance, publicClient]
   );
 
   const editBounty = useCallback(
@@ -188,21 +215,38 @@ export const useSmartContract = () => {
         const fee = (totalPrizeValue * BigInt(5)) / BigInt(100);
         const totalValue = totalPrizeValue + fee;
 
-        await client.sendTransaction({
+        // Send the transaction and get the hash
+        const txResponse = await client.sendTransaction({
           account: accounts[0] as `0x${string}`,
           to: contractAddress as `0x${string}`,
           data: data,
           value: totalValue,
         });
-        return true;
+
+        console.log("Edit bounty transaction sent:", txResponse);
+
+        // Wait for the transaction to be mined
+        const txReceipt = await publicClient.waitForTransactionReceipt({
+          hash: txResponse,
+        });
+
+        console.log("Edit bounty transaction confirmed:", txReceipt);
+
+        // Check if the transaction was successful
+        if (txReceipt.status === "success") {
+          console.log("Bounty edited successfully!");
+          return true;
+        } else {
+          console.log("Bounty edit failed:", txReceipt);
+          return false;
+        }
       } catch (error) {
         console.log("Transaction failed:", error);
         return false;
       }
     },
-    [accounts, client, contractAddress, getContractInstance]
+    [accounts, client, contractAddress, getContractInstance, publicClient]
   );
-
   const getBountyDetailById = useCallback(
     async (id: number) => {
       try {
@@ -262,18 +306,34 @@ export const useSmartContract = () => {
           _cid,
         ]);
 
-        await client.sendTransaction({
+        // Send the transaction and get the hash
+        const txResponse = await client.sendTransaction({
           account: accounts[0] as `0x${string}`,
           to: contractAddress as `0x${string}`,
           data: data,
         });
-        return true;
+
+        console.log("Transaction sent:", txResponse);
+
+        const txReceipt = await publicClient.waitForTransactionReceipt({
+          hash: txResponse,
+        });
+
+        console.log("Transaction confirmed:", txReceipt);
+
+        if (txReceipt.status === "success") {
+          console.log("Transaction successful!");
+          return true;
+        } else {
+          console.log("Transaction failed:", txReceipt);
+          return false;
+        }
       } catch (error) {
         console.log("Transaction failed:", error);
         return false;
       }
     },
-    [accounts, client, contractAddress, getContractInstance]
+    [accounts, client, contractAddress, getContractInstance, publicClient]
   );
 
   const cancelBounty = useCallback(
@@ -314,21 +374,39 @@ export const useSmartContract = () => {
 
         const data = contract.interface.encodeFunctionData("selectWinners", [
           _bountyId,
-          winners
+          winners,
         ]);
 
-        await client.sendTransaction({
+        // Send the transaction and get the hash
+        const txResponse = await client.sendTransaction({
           account: accounts[0] as `0x${string}`,
           to: contractAddress as `0x${string}`,
           data: data,
         });
-        return true;
+
+        console.log("Select winners transaction sent:", txResponse);
+
+        // Wait for the transaction to be mined
+        const txReceipt = await publicClient.waitForTransactionReceipt({
+          hash: txResponse,
+        });
+
+        console.log("Select winners transaction confirmed:", txReceipt);
+
+        // Check if the transaction was successful
+        if (txReceipt.status === "success") {
+          console.log("Winners selected successfully!");
+          return true;
+        } else {
+          console.log("Selecting winners failed:", txReceipt);
+          return false;
+        }
       } catch (error) {
         console.log("Transaction failed:", error);
         return false;
       }
     },
-    [accounts, client, contractAddress, getContractInstance]
+    [accounts, client, contractAddress, getContractInstance, publicClient]
   );
   return {
     getSigner,
